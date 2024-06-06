@@ -1,11 +1,28 @@
 import styled from "styled-components";
 import TextExpander from "../ui/TextExpander";
-import Button from "./Button";
+import { Button } from "./Button";
 import { useState } from "react";
 import Rating from "./Rating";
 import Spinner from "./Spinner";
 import { useGetProductReviews } from "../services/useReviews";
 import { useCreateReview } from "../services/useCreateReview";
+
+const StyledButton = styled.button`
+  outline: none;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  border: none;
+
+  background-color: #065ec0;
+  color: #fff;
+  padding: 16px 24px;
+  border-radius: 14px;
+  font-size: 16px;
+  &:hover {
+    background-color: #0654ab;
+  }
+`;
 
 const StyledH1 = styled.h1`
   display: block;
@@ -142,17 +159,14 @@ function Reviews({ id: productId }) {
               )}
               <ButtonContainer>
                 {!isWriting ? (
-                  <Button
-                    fontSize="16px"
-                    padding="16px 24px"
-                    borderRadius="14px"
+                  <StyledButton
                     onClick={() => setIsWriting(true)}
                     disabled={isPending}
                   >
                     Write review
-                  </Button>
+                  </StyledButton>
                 ) : (
-                  <Button
+                  <StyledButton
                     fontSize="16px"
                     padding="16px 24px"
                     borderRadius="14px"
@@ -173,7 +187,7 @@ function Reviews({ id: productId }) {
                     disabled={isPending}
                   >
                     Add review
-                  </Button>
+                  </StyledButton>
                 )}
                 {isWriting && (
                   <Rating

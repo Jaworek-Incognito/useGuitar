@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { MdOutlineAccountCircle } from "react-icons/md";
 import { IoCartOutline } from "react-icons/io5";
 import { useSelector } from "react-redux";
-import { GetCurrentUserApi } from "../../services/apiUser";
+import { getCurrentUserApi } from "../../services/apiUser";
 
 const StyledLogo = styled.header`
   margin: 0 auto;
@@ -77,7 +77,8 @@ function Logo() {
   const navigate = useNavigate();
 
   async function handleClick() {
-    const user = await GetCurrentUserApi();
+    const user = await getCurrentUserApi();
+
     if (user) {
       navigate("/account");
     }

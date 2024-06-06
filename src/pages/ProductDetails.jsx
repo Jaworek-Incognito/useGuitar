@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { GrStatusGood, GrStatusWarning } from "react-icons/gr";
-import Button from "../ui/Button";
+import { Button } from "../ui/Button";
 import { FaCartPlus, FaRegWindowClose } from "react-icons/fa";
 import Span from "../ui/Span";
 import DetailsTable from "../ui/DetailsTable";
@@ -21,6 +21,23 @@ import { addItem } from "../utilities/cartSlice";
 import useTitle from "../hooks/useTitle";
 
 Modal.setAppElement("#root");
+
+const StyledButton = styled.button`
+  outline: none;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  border: none;
+
+  background-color: #065ec0;
+  color: #fff;
+  padding: 16px 24px;
+  border-radius: 14px;
+  font-size: 16px;
+  &:hover {
+    background-color: #0654ab;
+  }
+`;
 
 const Wrapper = styled.div`
   margin: 0 auto;
@@ -328,17 +345,12 @@ function ProductDetails() {
                   <DeliverySpan>
                     Order before 3pm Mon-Thu for next day delivery
                   </DeliverySpan>
-                  <Button
-                    fontSize="16px"
-                    padding="16px 24px"
-                    borderRadius="14px"
-                    onClick={() => dispatch(addItem(id))}
-                  >
+                  <StyledButton onClick={() => dispatch(addItem(id))}>
                     <Span padding="0 10px 0 0" color="#fff">
                       <FaCartPlus />
                     </Span>
                     ADD TO CART
-                  </Button>
+                  </StyledButton>
                   <RatingContainer>
                     <Rating
                       editable={false}

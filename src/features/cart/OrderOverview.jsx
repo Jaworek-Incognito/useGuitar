@@ -12,6 +12,9 @@ import CartSummary from "./CartSummary";
 import { CartButton } from "../../ui/CartButton";
 import { useDeliveries } from "../../services/useDelivery";
 import { useCreateOrder } from "../../services/useCreateOrder";
+import { OrderTableHeader } from "../../ui/OrderTableHeader";
+import { OrderTableRow } from "../../ui/OrderTableRow";
+import { OrderTableFooter } from "../../ui/OrderTableFooter";
 
 const StyledH1 = styled.h1`
   font-size: 40px;
@@ -66,32 +69,6 @@ const Table = styled.div`
   margin-top: 20px;
 `;
 
-const TableHeader = styled.div`
-  display: grid;
-  grid-template-columns: 80px 1fr 140px 120px 180px;
-  background-color: transparent;
-  border-top: 1px solid #ddd;
-  border-left: 1px solid #ddd;
-  border-right: 1px solid #ddd;
-  border-bottom: 1px solid #ddd;
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
-  background-color: #eee;
-  height: 60px;
-  width: 100%;
-`;
-
-const TableRow = styled.div`
-  display: grid;
-  grid-template-columns: 80px 1fr 140px 120px 180px;
-  border-left: 1px solid #ddd;
-  border-right: 1px solid #ddd;
-  border-bottom: 1px solid #ddd;
-
-  height: 70px;
-  width: 100%;
-`;
-
 const StyledSpan = styled.span`
   margin: auto 0;
   padding: 0 24px;
@@ -106,23 +83,6 @@ const StyledSpanNumer = styled(StyledSpan)`
 const StyledCartPrice = styled(StyledSpan)`
   font-weight: 700;
   letter-spacing: 1px;
-`;
-
-const TableFooter = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  padding-right: 40px;
-
-  border-left: 1px solid #ddd;
-  border-right: 1px solid #ddd;
-  border-bottom: 1px solid #ddd;
-  border-bottom-left-radius: 8px;
-  border-bottom-right-radius: 8px;
-  background-color: #eee;
-
-  height: 60px;
-  width: 100%;
 `;
 
 const StyledColImage = styled(StyledSpan)`
@@ -280,15 +240,15 @@ function OrderOverview() {
           </EditButton>
         </CustomerContainer>
         <Table>
-          <TableHeader>
+          <OrderTableHeader>
             <StyledSpan></StyledSpan>
             <StyledSpan>Name</StyledSpan>
             <StyledSpan>Unit price</StyledSpan>
             <StyledSpan>Amount</StyledSpan>
             <StyledSpan>Total price</StyledSpan>
-          </TableHeader>
+          </OrderTableHeader>
           {products.map((product) => (
-            <TableRow key={product._id}>
+            <OrderTableRow key={product._id}>
               <StyledColImage>
                 <Img src={product.image} />
               </StyledColImage>
@@ -310,16 +270,16 @@ function OrderOverview() {
               <StyledSpanNumer>
                 $ {product.price * product.quantity}
               </StyledSpanNumer>
-            </TableRow>
+            </OrderTableRow>
           ))}
-          <TableFooter>
+          <OrderTableFooter>
             <StyledSpan style={{ paddingRight: "42px" }}>
               Cart price:
             </StyledSpan>
             <StyledCartPrice style={{ paddingRight: "48px" }}>
               $ {cartPrice}
             </StyledCartPrice>
-          </TableFooter>
+          </OrderTableFooter>
         </Table>
       </div>
       <PriceSummaryContainer>

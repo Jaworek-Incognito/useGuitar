@@ -1,43 +1,27 @@
 import styled from "styled-components";
 
-const StyledButton = styled.button`
-  outline: none;
-  cursor: pointer;
-  transition: all 0.2s;
-
-  border: ${(props) => (props.border ? props.border : "none")};
-
+export const Button = styled.button`
+  font-size: 24px;
   background-color: #065ec0;
-  color: ${(props) => (props.color ? props.color : "#fff")};
-  padding: ${(props) => (props.padding ? props.padding : "0 0 0 0")};
-  border-radius: ${(props) => (props.borderRadius ? props.borderRadius : "0")};
-  font-size: ${(props) => (props.fontSize ? props.fontSize : "inherit")};
+  width: 100%;
+  color: #fff;
+  border: none;
+  outline: none;
+  padding: 8px 0;
+  transition: all 0.3s;
+  letter-spacing: 2px;
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  cursor: pointer;
   &:hover {
     background-color: #0654ab;
   }
+  &:disabled {
+    opacity: 0.5;
+    background-color: #0654ab;
+    cursor: not-allowed;
+  }
 `;
-
-function Button({
-  children,
-  onClick,
-  padding,
-  color,
-  fontSize,
-  borderRadius,
-  border,
-}) {
-  return (
-    <StyledButton
-      onClick={onClick}
-      padding={padding}
-      fontSize={fontSize}
-      color={color}
-      borderRadius={borderRadius}
-      border={border}
-    >
-      {children}
-    </StyledButton>
-  );
-}
-
-export default Button;

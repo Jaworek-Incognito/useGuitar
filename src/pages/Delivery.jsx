@@ -2,19 +2,24 @@ import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { useForm } from "react-hook-form";
 
-import countries from "../../utilities/countries";
+import countries from "../utilities/countries";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { ErrorMessage } from "@hookform/error-message";
-import { StyledError } from "../../ui/StyledError";
-import { useUser } from "../../services/useUser";
-import { useUpdateOrderingUser } from "../../services/useUpdateOrderingUser";
-import SpinnerMini from "../../ui/SpinnerMini";
+import { StyledError } from "../ui/StyledError";
+import { useUser } from "../services/useUser";
+import { useUpdateOrderingUser } from "../services/useUpdateOrderingUser";
+import SpinnerMini from "../ui/SpinnerMini";
+import toast from "react-hot-toast";
+import { Button } from "../ui/Button";
+import { Input } from "../ui/Input";
+import { Select } from "../ui/Select";
+import { FormRow } from "../ui/FormRow";
+import { FormCol, SingleFormCol } from "../ui/FormCol";
 
 const StyledH1 = styled.h1`
   font-size: 40px;
   font-weight: 700;
-  /* letter-spacing: 2px; */
   font-family: "Roboto";
   padding: 6px;
   margin-bottom: 40px;
@@ -24,50 +29,6 @@ const Wrapper = styled.div`
   margin: 40px auto 80px auto;
   width: 1200px;
   position: relative;
-`;
-
-const StyledFormCol = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-  /* padding: 8px; */
-  /* border-bottom: 1px solid #eee; */
-`;
-
-const StyledSingleFormCol = styled(StyledFormCol)`
-  grid-template-columns: 1fr;
-`;
-
-const StyledFormRow = styled.div`
-  display: grid;
-  grid-template-rows: 1fr auto 16px;
-
-  /* padding: 8px; */
-  /* border-bottom: 1px solid #eee; */
-`;
-
-const StyledInput = styled.input`
-  font-family: "Lato";
-  font-size: 18px;
-  padding: 10px 16px;
-  margin-top: 8px;
-  border-radius: 6px;
-  font-weight: 300;
-  outline: none;
-  border: 1px solid #ddd;
-  background-color: transparent;
-  letter-spacing: 1px;
-  /* color: #fff; */
-  input::-webkit-outer-spin-button,
-  input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
-  &:disabled {
-    opacity: 0.5;
-    background-color: #ddd;
-    cursor: not-allowed;
-  }
 `;
 
 const StyledForm = styled.form`
@@ -87,50 +48,6 @@ const FormContainer = styled.div`
   margin: 0 auto;
 `;
 
-const StyledSelect = styled.select`
-  font-family: "Lato";
-  font-size: 18px;
-  padding: 10px;
-  margin-top: 8px;
-  border-radius: 6px;
-  font-weight: 300;
-  outline: none;
-  border: 1px solid #ddd;
-  background-color: transparent;
-  letter-spacing: 1px;
-  &:disabled {
-    opacity: 0.5;
-    background-color: #ddd;
-    cursor: not-allowed;
-  }
-`;
-
-const StyledButton = styled.button`
-  font-size: 24px;
-  background-color: #065ec0;
-  width: 100%;
-  color: #fff;
-  border: none;
-  outline: none;
-  padding: 8px 0;
-  transition: all 0.3s;
-  letter-spacing: 2px;
-  margin-top: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 48px;
-  cursor: pointer;
-  &:hover {
-    background-color: #0654ab;
-  }
-  &:disabled {
-    opacity: 0.5;
-    background-color: #0654ab;
-    cursor: not-allowed;
-  }
-`;
-
 const defaultValues = {
   firstName: "",
   lastName: "",
@@ -140,7 +57,7 @@ const defaultValues = {
   postCode: "",
 };
 
-function Delivery() {
+function Delivery({ isAccountPage }) {
   const cart = useSelector((state) => state.cart.cartAfterFetch);
   const navigate = useNavigate();
   const { user, isLoading } = useUser();
@@ -154,16 +71,22 @@ function Delivery() {
   } = useForm();
 
   useEffect(() => {
-    if (!cart || cart.length < 1) {
+    if (!isAccountPage && (!cart || cart.length < 1)) {
       return navigate("/cart");
     }
     return reset(user);
-  }, [navigate, cart, reset, user]);
+  }, [navigate, cart, reset, user, isAccountPage]);
 
   function onSubmit(data) {
     updateOrderingUser(data, {
       onSuccess: () => {
-        navigate("/cart/overview");
+        if (!isAccountPage) navigate("/cart/overview");
+        else {
+          toast.success(
+            "Your default shipment details have been successfully saved",
+            { duration: 5000 }
+          );
+        }
       },
     });
   }
@@ -178,12 +101,12 @@ function Delivery() {
   return (
     <Wrapper>
       <FormContainer>
-        <StyledH1>Delivery</StyledH1>
+        {!isAccountPage && <StyledH1>Delivery</StyledH1>}
         <StyledForm onSubmit={handleSubmit(onSubmit, onError)}>
-          <StyledFormCol>
-            <StyledFormRow>
+          <FormCol>
+            <FormRow>
               <StyledSpan>first name</StyledSpan>
-              <StyledInput
+              <Input
                 type="text"
                 name="firstName"
                 disabled={isWorking}
@@ -196,10 +119,10 @@ function Delivery() {
                 name="firstName"
                 render={({ message }) => <StyledError>{message}</StyledError>}
               />
-            </StyledFormRow>
-            <StyledFormRow>
+            </FormRow>
+            <FormRow>
               <StyledSpan>last name</StyledSpan>
-              <StyledInput
+              <Input
                 type="text"
                 name="lastName"
                 disabled={isWorking}
@@ -212,12 +135,12 @@ function Delivery() {
                 name="lastName"
                 render={({ message }) => <StyledError>{message}</StyledError>}
               />
-            </StyledFormRow>
-          </StyledFormCol>
-          <StyledSingleFormCol>
-            <StyledFormRow>
+            </FormRow>
+          </FormCol>
+          <SingleFormCol>
+            <FormRow>
               <StyledSpan>street address</StyledSpan>
-              <StyledInput
+              <Input
                 type="text"
                 name="address"
                 disabled={isWorking}
@@ -228,12 +151,12 @@ function Delivery() {
                 name="address"
                 render={({ message }) => <StyledError>{message}</StyledError>}
               />
-            </StyledFormRow>
-          </StyledSingleFormCol>
-          <StyledFormCol>
-            <StyledFormRow>
+            </FormRow>
+          </SingleFormCol>
+          <FormCol>
+            <FormRow>
               <StyledSpan>city</StyledSpan>
-              <StyledInput
+              <Input
                 type="text"
                 name="city"
                 disabled={isWorking}
@@ -246,10 +169,10 @@ function Delivery() {
                 name="city"
                 render={({ message }) => <StyledError>{message}</StyledError>}
               />
-            </StyledFormRow>
-            <StyledFormRow>
+            </FormRow>
+            <FormRow>
               <StyledSpan>post code</StyledSpan>
-              <StyledInput
+              <Input
                 type="text"
                 name="postCode"
                 disabled={isWorking}
@@ -262,12 +185,12 @@ function Delivery() {
                 name="postCode"
                 render={({ message }) => <StyledError>{message}</StyledError>}
               />
-            </StyledFormRow>
-          </StyledFormCol>
-          <StyledFormCol>
-            <StyledFormRow>
+            </FormRow>
+          </FormCol>
+          <FormCol>
+            <FormRow>
               <StyledSpan>phone number</StyledSpan>
-              <StyledInput
+              <Input
                 type="text"
                 name="phoneNumber"
                 disabled={isWorking}
@@ -280,10 +203,10 @@ function Delivery() {
                 name="phoneNumber"
                 render={({ message }) => <StyledError>{message}</StyledError>}
               />
-            </StyledFormRow>
-            <StyledFormRow>
+            </FormRow>
+            <FormRow>
               <StyledSpan>country</StyledSpan>
-              <StyledSelect
+              <Select
                 name="country"
                 defaultValue={"Poland"}
                 disabled={isWorking}
@@ -296,17 +219,17 @@ function Delivery() {
                     {country}
                   </option>
                 ))}
-              </StyledSelect>
+              </Select>
               <ErrorMessage
                 errors={errors}
                 name="country"
                 render={({ message }) => <StyledError>{message}</StyledError>}
               />
-            </StyledFormRow>
-          </StyledFormCol>
-          <StyledButton type="submit" disabled={isWorking}>
-            {isWorking ? <SpinnerMini /> : "Continue"}
-          </StyledButton>
+            </FormRow>
+          </FormCol>
+          <Button type="submit" disabled={isWorking}>
+            {isWorking ? <SpinnerMini /> : isAccountPage ? "Save" : "Continue"}
+          </Button>
         </StyledForm>
       </FormContainer>
     </Wrapper>

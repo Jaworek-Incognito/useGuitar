@@ -1,8 +1,8 @@
 import { useState } from "react";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
-import { useLogin } from "../services/useLogin";
-import SpinnerMini from "../ui/SpinnerMini";
+import { useLogin } from "../../services/useLogin";
+import SpinnerMini from "../../ui/SpinnerMini";
 
 const Wrapper = styled.div`
   display: flex;

@@ -11,3 +11,13 @@ export async function LoginApi({ user }) {
     throw new Error(error.response.data.msg);
   }
 }
+
+export async function LogoutApi() {
+  const url = `${baseUrl}/logout`;
+  try {
+    const response = await axios.delete(url);
+    return response.data.msg;
+  } catch (error) {
+    throw new Error(error.response.data.msg);
+  }
+}

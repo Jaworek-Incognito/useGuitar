@@ -30,3 +30,13 @@ export async function updateStatusOrderApi(id) {
     throw new Error(error.response.data.msg);
   }
 }
+
+export async function getUserOrdersApi(id) {
+  const url = `${baseUrl}/orders/getUserOrders/${id}`;
+  try {
+    const response = await axios.get(url);
+    return response.data.orders;
+  } catch (error) {
+    throw new Error(error.response.data.msg);
+  }
+}

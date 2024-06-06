@@ -12,17 +12,18 @@ import Home from "./pages/Home";
 import Guitars from "./features/guitars/Guitars";
 import PageNotFound from "./ui/PageNotFound";
 import ProductDetails from "./pages/ProductDetails";
-import Login from "./pages/Login";
-import Signup from "./pages/Signup";
+import Login from "./features/account/Login";
+import Signup from "./features/account/Signup";
 import Amplifiers from "./features/amplifiers/Amplifiers";
 import Pickups from "./features/pickups/Pickups";
 import MultiEffects from "./features/multiEffects/MultiEffects";
 
 import Cart from "./features/cart/Cart";
-import Delivery from "./features/cart/Delivery";
+import Delivery from "./pages/Delivery";
 import OrderOverview from "./features/cart/OrderOverview";
 import Payment from "./features/cart/Payment";
-import Account from "./pages/Account";
+import Account from "./features/account/Account";
+import Order from "./features/account/Order";
 
 axios.defaults.withCredentials = true;
 
@@ -55,12 +56,13 @@ function App() {
               <Route path="amplifiers" element={<Amplifiers />} />
               <Route path="pickups" element={<Pickups />} />
               <Route path="multiEffects" element={<MultiEffects />} />
-              <Route path="cart" element={<Cart />} />
 
+              <Route path="cart" element={<Cart />} />
               <Route path="cart/delivery" element={<Delivery />} />
               <Route path="cart/overview" element={<OrderOverview />} />
 
               <Route path="account" element={<Account />} />
+              <Route path="account/order/:id" element={<Order />} />
 
               <Route
                 path="guitars/product/:name"

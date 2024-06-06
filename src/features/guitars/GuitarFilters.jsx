@@ -54,7 +54,6 @@ const StyledUl = styled.ul`
       : css`
           ${slideIn} .75s forwards
         `};
-  /* border: 2px solid #434545; */
 `;
 
 const StyledUlScrollbarHidden = styled(StyledUl)`
