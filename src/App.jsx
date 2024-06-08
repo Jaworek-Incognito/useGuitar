@@ -24,6 +24,8 @@ import OrderOverview from "./features/cart/OrderOverview";
 import Payment from "./features/cart/Payment";
 import Account from "./features/account/Account";
 import Order from "./features/account/Order";
+import VerifyEmail from "./features/account/VerifyEmail";
+import ResetPassword from "./features/account/ResetPassword";
 
 axios.defaults.withCredentials = true;
 
@@ -49,6 +51,8 @@ function App() {
             <Route path="payment/:id" element={<Payment />} />
             <Route path="login" element={<Login />} />
             <Route path="signup" element={<Signup />} />
+            <Route path="account/verify-email" element={<VerifyEmail />} />
+            <Route path="account/reset-password" element={<ResetPassword />} />
 
             <Route element={<AppLayout />}>
               <Route path="/" element={<Home />} />

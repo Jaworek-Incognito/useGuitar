@@ -1,8 +1,10 @@
 import { useState } from "react";
 import styled from "styled-components";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useLogin } from "../../services/useLogin";
 import SpinnerMini from "../../ui/SpinnerMini";
+import { forgotPasswordApi } from "../../services/apiAuth";
+import toast from "react-hot-toast";
 
 const Wrapper = styled.div`
   display: flex;
@@ -15,6 +17,11 @@ const Wrapper = styled.div`
 `;
 
 const Label = styled.label`
+  display: block;
+  font-size: 16px;
+`;
+
+const Span = styled.span`
   display: block;
   font-size: 16px;
 `;
@@ -80,11 +87,15 @@ const Img = styled.img`
 
 function Login() {
   const [email, setEmail] = useState("");
+  const [forgrotEmail, setForgrotEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [pageForm, setPageForm] = useState("login");
 
   const { Login, isPending } = useLogin();
 
-  function handleSubmit(e) {
+  const navigate = useNavigate();
+
+  function handleLogin(e) {
     e.preventDefault();
     const user = {
       email,
@@ -93,43 +104,82 @@ function Login() {
     Login({ user });
   }
 
+  async function handleForgotPassword(e) {
+    e.preventDefault();
+    const response = await forgotPasswordApi(forgrotEmail);
+    toast.loading("Loading...");
+    if (response) {
+      toast.dismiss();
+      toast.success(response);
+      navigate("/");
+    }
+  }
+
   return (
     <Wrapper>
       <StyledNavLink to={"/"}>
         <Img src="https://res.cloudinary.com/dlartwnnr/image/upload/v1715989024/logo-white-no-background_yb7i1k.svg" />
       </StyledNavLink>
-      <Form onSubmit={handleSubmit}>
-        <FormRow>
-          <Label htmlFor="email">E-mail</Label>
-          <Input
-            id="email"
-            type="email"
-            autoComplete="username"
-            value={email}
-            disabled={isPending}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </FormRow>
-        <FormRow>
-          <Label htmlFor="password">Password</Label>
-          <Input
-            id="password"
-            type="password"
-            autoComplete="password"
-            value={password}
-            disabled={isPending}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </FormRow>
-        <FormRow>
-          <Button disabled={isPending} onClick={handleSubmit}>
-            {isPending ? <SpinnerMini /> : "Login"}
-          </Button>
-          <NavLink to="/signup" style={{ color: "#065ec0", fontWeight: 700 }}>
-            If you aren't registered, please sign up.
-          </NavLink>
-        </FormRow>
-      </Form>
+      {pageForm === "login" && (
+        <Form onSubmit={handleLogin}>
+          <FormRow>
+            <Label htmlFor="email">E-mail</Label>
+            <Input
+              id="email"
+              type="email"
+              autoComplete="email"
+              value={email}
+              disabled={isPending}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </FormRow>
+          <FormRow>
+            <Label htmlFor="password">Password</Label>
+            <Input
+              id="password"
+              type="password"
+              autoComplete="password"
+              value={password}
+              disabled={isPending}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </FormRow>
+          <FormRow>
+            <Button disabled={isPending} type="submit">
+              {isPending ? <SpinnerMini /> : "Login"}
+            </Button>
+            <Span
+              onClick={() => setPageForm("forgotPassword")}
+              style={{ color: "#065ec0", fontWeight: 700, cursor: "pointer" }}
+            >
+              I forgot password
+            </Span>
+            <NavLink to="/signup" style={{ color: "#065ec0", fontWeight: 700 }}>
+              If you aren't registered, please sign up.
+            </NavLink>
+          </FormRow>
+        </Form>
+      )}
+      {pageForm === "forgotPassword" && (
+        <Form onSubmit={handleForgotPassword}>
+          <FormRow>
+            <Label htmlFor="forgotEmail">Please provide your email</Label>
+            <Input
+              id="forgotEmail"
+              type="email"
+              autoComplete="email"
+              value={forgrotEmail}
+              disabled={isPending}
+              onChange={(e) => setForgrotEmail(e.target.value)}
+            />
+          </FormRow>
+          <FormRow>
+            <Button disabled={isPending} type="submit">
+              {isPending ? <SpinnerMini /> : "Submit"}
+            </Button>
+          </FormRow>
+        </Form>
+      )}
     </Wrapper>
   );
 }

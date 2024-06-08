@@ -30,6 +30,8 @@ function ChangePassword() {
     e.preventDefault();
     const response = await updateUserPassword({ currPassword, newPassword });
     toast.success(response);
+    setCurrPassword("");
+    setNewPassword("");
   }
 
   return (
