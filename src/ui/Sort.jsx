@@ -37,7 +37,7 @@ function Sort() {
         <option value="-name">Name (Z-A)</option>
         <option value="price">Price (low-high)</option>
         <option value="-price">Price (high-low)</option>
-        <option value="featured">Featured first</option>
+        <option value="-featured">Featured first</option>
         <option value="-numOfReviews">Popularity</option>
       </Select>
     </SortWrapper>

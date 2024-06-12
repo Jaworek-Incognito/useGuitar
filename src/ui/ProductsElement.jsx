@@ -1,6 +1,10 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import Rating from "./Rating";
+import { TbDiscount } from "react-icons/tb";
+import { MdOutlineDiscount, MdOutlineStarOutline } from "react-icons/md";
+import { priceConverter } from "../helpers/priceConverter";
+import { TiStar } from "react-icons/ti";
 
 const Li = styled.li`
   display: grid;
@@ -10,11 +14,12 @@ const Li = styled.li`
   color: #000;
   width: 270px;
   padding: 18px 0;
-  height: 540px;
+  height: 560px;
   background-color: #fff;
   overflow: hidden;
   margin: 0 6px 12px 6px;
   transition: all 0.2s;
+  position: relative;
   &:hover {
     border: 1px solid #aaa;
   }
@@ -70,6 +75,33 @@ const Price = styled.span`
   margin: auto 0 auto 4px;
 `;
 
+const DiscountContainer = styled.div`
+  position: absolute;
+  top: 14px;
+  right: 10px;
+  z-index: 1000;
+  background-color: #24a509;
+  width: fit-content;
+  padding: 2px 8px;
+  margin-top: 6px;
+  color: #fff;
+  display: flex;
+  font-size: 14px;
+`;
+
+const FeaturedContainer = styled.div`
+  position: absolute;
+  top: 14px;
+  left: 10px;
+  z-index: 1000;
+  width: fit-content;
+  padding: 2px 8px;
+  margin-top: 6px;
+  color: #065ec0;
+  display: flex;
+  font-size: 16px;
+`;
+
 function ProductsElement({ product }) {
   const {
     name,
@@ -82,13 +114,30 @@ function ProductsElement({ product }) {
     category,
     averageRating,
     numOfReviews,
+    discount,
+    featured,
   } = product;
 
   const urlName = name.replaceAll(" ", "_");
 
   return (
-    <Link to={`product/${urlName}`}>
+    <Link
+      to={`/${
+        category !== "multi effect" ? `${category}s` : "multiEffects"
+      }/product/${urlName}`}
+    >
       <Li>
+        {discount > 0 && (
+          <DiscountContainer>
+            <MdOutlineDiscount />
+            <span style={{ marginLeft: "4px" }}> Save {discount} %</span>
+          </DiscountContainer>
+        )}
+        {featured && (
+          <FeaturedContainer>
+            <TiStar />
+          </FeaturedContainer>
+        )}
         <ImageContainer>
           <Img src={images[0].imageURL ? images[0].imageURL : ""} />
         </ImageContainer>
@@ -109,7 +158,7 @@ function ProductsElement({ product }) {
               </>
             )}
           </Span>
-          <Price>{`$${price}.00`}</Price>
+          <Price>${priceConverter(price)}</Price>
         </InfoContainer>
       </Li>
     </Link>

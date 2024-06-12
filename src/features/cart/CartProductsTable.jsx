@@ -10,6 +10,7 @@ import {
   deleteItem,
   decreaseItemQuantity,
 } from "../../utilities/cartSlice";
+import { priceConverter } from "../../helpers/priceConverter";
 
 const StyledRow = styled.div`
   width: 94%;
@@ -124,7 +125,7 @@ function CartProductsTable({ products, cart }) {
                 </StyledButton>
               </QuantityContainer>
             </StyledCol>
-            <StyledCol>{`$${product.price}.00`}</StyledCol>
+            <StyledCol>{priceConverter(product.price)}</StyledCol>
             <StyledCol>
               <StyledButton
                 onClick={() => {

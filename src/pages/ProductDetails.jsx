@@ -19,6 +19,7 @@ import Reviews from "../ui/Reviews";
 import { useDispatch } from "react-redux";
 import { addItem } from "../utilities/cartSlice";
 import useTitle from "../hooks/useTitle";
+import { priceConverter } from "../helpers/priceConverter";
 
 Modal.setAppElement("#root");
 
@@ -141,6 +142,7 @@ const StatusSpan = styled.span`
   display: block;
   font-size: 22px;
   font-weight: 800;
+  margin: 12px 0;
   letter-spacing: 1px;
   padding: 6px 0 6px 0;
   text-transform: uppercase;
@@ -208,6 +210,16 @@ const RatingContainer = styled.div`
   margin-top: 18px;
 `;
 
+const NoDiscountPriceSpan = styled.span`
+  margin-left: 10px;
+  font-family: "Roboto";
+  text-decoration: line-through;
+  font-weight: 300;
+  text-decoration-thickness: 1px;
+  color: red;
+  font-size: 26px;
+`;
+
 function ProductDetails() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [currImage, setCurrImage] = useState(null);
@@ -233,6 +245,8 @@ function ProductDetails() {
     _id: id,
     numOfReviews,
     averageRating,
+    noDiscountPrice,
+    discount,
   } = product;
 
   return (
@@ -334,7 +348,14 @@ function ProductDetails() {
                 <HeaderContainer>
                   <StyledH1>{name}</StyledH1>
                   <PriceContainer>
-                    <Price>$ {price}.00</Price>
+                    <Price>
+                      ${priceConverter(price)}
+                      {discount > 1 && (
+                        <NoDiscountPriceSpan>
+                          ${priceConverter(noDiscountPrice)}
+                        </NoDiscountPriceSpan>
+                      )}
+                    </Price>
                   </PriceContainer>
                   <StatusSpan inventory={inventory}>
                     <StyledIcon>
@@ -342,9 +363,7 @@ function ProductDetails() {
                     </StyledIcon>
                     {inventory > 0 ? "In Stock" : "Out Of Stock"}
                   </StatusSpan>
-                  <DeliverySpan>
-                    Order before 3pm Mon-Thu for next day delivery
-                  </DeliverySpan>
+
                   <StyledButton onClick={() => dispatch(addItem(id))}>
                     <Span padding="0 10px 0 0" color="#fff">
                       <FaCartPlus />

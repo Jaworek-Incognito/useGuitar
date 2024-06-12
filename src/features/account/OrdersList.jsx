@@ -2,6 +2,7 @@ import styled from "styled-components";
 import useUserOrders from "../../services/useUserOrders";
 import Spinner from "../../ui/Spinner";
 import { NavLink } from "react-router-dom";
+import { priceConverter } from "../../helpers/priceConverter";
 
 const TableHeader = styled.div`
   display: grid;
@@ -61,7 +62,6 @@ function OrdersList({ user }) {
 
   if (isLoading) return <Spinner />;
 
-  console.log(orders);
   return (
     <Table>
       <TableHeader>
@@ -74,7 +74,7 @@ function OrdersList({ user }) {
         <StyledNav key={order._id} to={`order/${order._id}`}>
           <TableRow>
             <StyledSpan>{order._id}</StyledSpan>
-            <StyledSpan>{order.total}</StyledSpan>
+            <StyledSpan>$ {priceConverter(order.total)}</StyledSpan>
             <StyledSpan>{order.status}</StyledSpan>
             <StyledSpan>{order.createdAt.split("T")[0]}</StyledSpan>
           </TableRow>

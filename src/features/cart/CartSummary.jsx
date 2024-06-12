@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { getTotalCartPrice } from "../../utilities/cartSlice";
+import { priceConverter } from "../../helpers/priceConverter";
 
 const CostContainer = styled.div`
   display: flex;
@@ -24,7 +25,7 @@ function CartSummary({ priceProp }) {
   return (
     <CostContainer>
       <StyledSpan>{priceProp ? `Cart price:` : `Estimated Total:`}</StyledSpan>
-      <StyledCost>{`$ ${cartPrice}`}</StyledCost>
+      <StyledCost>$ {priceConverter(cartPrice)}</StyledCost>
     </CostContainer>
   );
 }

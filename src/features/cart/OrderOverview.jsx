@@ -15,6 +15,7 @@ import { useCreateOrder } from "../../services/useCreateOrder";
 import { OrderTableHeader } from "../../ui/OrderTableHeader";
 import { OrderTableRow } from "../../ui/OrderTableRow";
 import { OrderTableFooter } from "../../ui/OrderTableFooter";
+import { priceConverter } from "../../helpers/priceConverter";
 
 const StyledH1 = styled.h1`
   font-size: 40px;
@@ -264,11 +265,13 @@ function OrderOverview() {
                   {product.name}
                 </StyledNavLink>
               </StyledSpan>
-              <StyledSpanNumer>$ {product.price}</StyledSpanNumer>
+              <StyledSpanNumer>
+                $ {priceConverter(product.price)}
+              </StyledSpanNumer>
 
               <StyledSpanNumer>{product.quantity}</StyledSpanNumer>
               <StyledSpanNumer>
-                $ {product.price * product.quantity}
+                $ {priceConverter(product.price * product.quantity)}
               </StyledSpanNumer>
             </OrderTableRow>
           ))}
@@ -277,7 +280,7 @@ function OrderOverview() {
               Cart price:
             </StyledSpan>
             <StyledCartPrice style={{ paddingRight: "48px" }}>
-              $ {cartPrice}
+              $ {priceConverter(cartPrice)}
             </StyledCartPrice>
           </OrderTableFooter>
         </Table>
@@ -297,11 +300,13 @@ function OrderOverview() {
           Delivery cost:{" "}
           <span>
             {" "}
-            {deliveryDetails.price === 0 ? "-" : `$ ${deliveryDetails.cost}`}
+            {deliveryDetails.cost === 0
+              ? "-"
+              : `$ ${priceConverter(deliveryDetails.cost)}`}
           </span>
         </OtherCostsContainer>
         <StyledTotalPriceContainer>
-          Total price: <span>$ {totalPrice}</span>
+          Total price: <span>$ {priceConverter(totalPrice)}</span>
         </StyledTotalPriceContainer>
         <CartButton
           disabled={deliveryDetails.cost === 0 || isOrdering}
@@ -334,9 +339,11 @@ function OrderOverview() {
                     </DeliveryCompanySpan>
                   </div>
                   <DeliverySpan style={{ fontWeight: "300" }}>
-                    delivery to you in 2 business days
+                    delivery to you in {delivery.time} business days
                   </DeliverySpan>
-                  <DeliveryCostSpan>$ {delivery.cost}</DeliveryCostSpan>
+                  <DeliveryCostSpan>
+                    $ {priceConverter(delivery.cost)}
+                  </DeliveryCostSpan>
                 </DeliveryRow>
               ))}
           </form>
