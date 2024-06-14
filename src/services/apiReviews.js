@@ -1,12 +1,16 @@
 import axios from "axios";
 import { url as baseUrl } from "../utilities/url";
 
-export async function getProductReviewsApi(id) {
-  const url = `${baseUrl}/reviews/product/${id}`;
+export async function getProductReviewsApi(id, rating) {
+  let url = "";
+  url = `${baseUrl}/reviews/product/${id}`;
 
+  if (rating) {
+    url = `${baseUrl}/reviews/product/${id}?rating=${rating}`;
+  }
   try {
     const response = await axios.get(url);
-    return response.data.reviews;
+    return response.data;
   } catch (error) {
     console.error(error.message);
   }

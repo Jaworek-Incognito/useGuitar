@@ -7,34 +7,34 @@ const Input = styled.input`
 `;
 
 const Star = styled.span`
-  /* cursor: pointer; */
   font-size: ${(props) => (props.card ? "20px" : "28px")};
   margin-right: -5px;
-  /* padding: 0 5px; */
   color: ${(props) =>
     props.currentrating <= (props.hover || props.rating) ? "#0654ab" : "#ddd"};
 `;
 
 const Content = styled.div`
   color: #000;
-`;
-
-const P = styled.p`
-  padding: 0 10px;
-  font-size: 16px;
-  font-weight: 800;
-  letter-spacing: 1px;
-  color: inherit;
-  border-top: ${(props) =>
-    props.editable === false && props.review !== true
-      ? "1px solid #ddd"
-      : "none"};
+  height: 30px;
 `;
 
 const Span = styled.span`
   font-size: 14px;
   padding-left: 4px;
   color: #aaa;
+`;
+
+const AvarageRatingSpan = styled.span`
+  font-size: 20px;
+  padding-left: 6px;
+  padding-bottom: 10px;
+  font-weight: 700;
+`;
+
+const CardAvarageRatingSpan = styled.span`
+  font-size: 16px;
+  padding-left: 6px;
+  font-weight: 700;
 `;
 
 function Rating({
@@ -48,7 +48,7 @@ function Rating({
   isComment,
 }) {
   const ratingAvarageFloor = !isNaN(ratingAvarage)
-    ? Math.floor(ratingAvarage)
+    ? Math.round(ratingAvarage)
     : null;
 
   const [rating, setRating] = useState(null);
@@ -64,55 +64,62 @@ function Rating({
         const currentrating = index + 1;
 
         return (
-          <label key={index}>
-            {editable ? (
-              <>
-                {" "}
-                <Input
-                  key={star}
-                  type="radio"
-                  name="rating"
-                  value={currentrating}
-                  onChange={() => {
-                    setRating(currentrating);
-                    setStars(currentrating);
-                  }}
-                />{" "}
-                <Star
-                  rating={rating}
-                  currentrating={currentrating}
-                  hover={hover}
-                  card={card}
-                  onMouseEnter={() => setHover(currentrating)}
-                  onMouseLeave={() => setHover(null)}
-                >
+          <>
+            <label key={index}>
+              {editable ? (
+                <>
                   {" "}
-                  <TiStar />
-                </Star>
-              </>
-            ) : (
-              <>
-                {" "}
-                <Input
-                  key={star}
-                  type="radio"
-                  name="rating"
-                  value={currentrating}
-                />
-                <Star
-                  rating={rating}
-                  currentrating={currentrating}
-                  card={card}
-                  hover={hover}
-                >
+                  <Input
+                    key={star}
+                    type="radio"
+                    name="rating"
+                    value={currentrating}
+                    onChange={() => {
+                      setRating(currentrating);
+                      setStars(currentrating);
+                    }}
+                  />{" "}
+                  <Star
+                    rating={rating}
+                    currentrating={currentrating}
+                    hover={hover}
+                    card={card}
+                    onMouseEnter={() => setHover(currentrating)}
+                    onMouseLeave={() => setHover(null)}
+                  >
+                    {" "}
+                    <TiStar />
+                  </Star>
+                </>
+              ) : (
+                <>
                   {" "}
-                  <TiStar />
-                </Star>
-              </>
-            )}
-          </label>
+                  <Input
+                    key={star}
+                    type="radio"
+                    name="rating"
+                    value={currentrating}
+                  />
+                  <Star
+                    rating={rating}
+                    currentrating={currentrating}
+                    card={card}
+                    hover={hover}
+                  >
+                    {" "}
+                    <TiStar />
+                  </Star>
+                </>
+              )}
+            </label>
+          </>
         );
       })}
+      {ratingAvarage && card === "true" ? (
+        <CardAvarageRatingSpan>{ratingAvarage}</CardAvarageRatingSpan>
+      ) : (
+        <AvarageRatingSpan>{ratingAvarage}</AvarageRatingSpan>
+      )}
       {!isComment && <Span>{numOfRatings ? `(${numOfRatings})` : "(0)"}</Span>}
     </Content>
   );

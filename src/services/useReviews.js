@@ -1,10 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
 import { getProductReviewsApi } from "./apiReviews";
+import { useSearchParams } from "react-router-dom";
 
-export function useGetProductReviews(id) {
-  const { isLoading, data: reviews } = useQuery({
-    queryKey: ["reviews", id],
-    queryFn: () => getProductReviewsApi(id),
+export function useProductReviews(id) {
+  const [searchParams] = useSearchParams();
+  const rating = searchParams.get("rating");
+  const { isLoading, data: { reviews, ratingsCount } = {} } = useQuery({
+    queryKey: ["reviews", id, rating],
+    queryFn: () => getProductReviewsApi(id, rating),
   });
-  return { isLoading, reviews };
+  return { isLoading, reviews, ratingsCount };
 }

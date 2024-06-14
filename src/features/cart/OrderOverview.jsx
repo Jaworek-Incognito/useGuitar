@@ -77,7 +77,7 @@ const StyledSpan = styled.span`
   font-size: 18px;
 `;
 
-const StyledSpanNumer = styled(StyledSpan)`
+const StyledSpanNumber = styled(StyledSpan)`
   padding: 0 0 0 40px;
 `;
 
@@ -164,6 +164,7 @@ const StyledNavLink = styled(NavLink)`
   color: #000;
   align-items: center;
   min-height: 40px;
+  text-transform: uppercase;
 `;
 
 function OrderOverview() {
@@ -265,14 +266,14 @@ function OrderOverview() {
                   {product.name}
                 </StyledNavLink>
               </StyledSpan>
-              <StyledSpanNumer>
+              <StyledSpanNumber>
                 $ {priceConverter(product.price)}
-              </StyledSpanNumer>
+              </StyledSpanNumber>
 
-              <StyledSpanNumer>{product.quantity}</StyledSpanNumer>
-              <StyledSpanNumer>
+              <StyledSpanNumber>{product.quantity}</StyledSpanNumber>
+              <StyledSpanNumber>
                 $ {priceConverter(product.price * product.quantity)}
-              </StyledSpanNumer>
+              </StyledSpanNumber>
             </OrderTableRow>
           ))}
           <OrderTableFooter>

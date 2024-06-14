@@ -9,7 +9,8 @@ import { TiStar } from "react-icons/ti";
 const Li = styled.li`
   display: grid;
   grid-template-rows: 320px 1fr;
-  border: 1px solid #ddd;
+  border: ${(props) =>
+    props.featured ? "1px solid #3D86D8" : "1px solid #ddd"};
   /* border-radius: 14px; */
   color: #000;
   width: 270px;
@@ -21,7 +22,8 @@ const Li = styled.li`
   transition: all 0.2s;
   position: relative;
   &:hover {
-    border: 1px solid #aaa;
+    border: ${(props) =>
+      props.featured ? "1px solid #065EC0" : "1px solid #aaa"};
   }
 `;
 
@@ -126,18 +128,14 @@ function ProductsElement({ product }) {
         category !== "multi effect" ? `${category}s` : "multiEffects"
       }/product/${urlName}`}
     >
-      <Li>
+      <Li featured={featured}>
         {discount > 0 && (
           <DiscountContainer>
             <MdOutlineDiscount />
             <span style={{ marginLeft: "4px" }}> Save {discount} %</span>
           </DiscountContainer>
         )}
-        {featured && (
-          <FeaturedContainer>
-            <TiStar />
-          </FeaturedContainer>
-        )}
+
         <ImageContainer>
           <Img src={images[0].imageURL ? images[0].imageURL : ""} />
         </ImageContainer>
@@ -150,6 +148,7 @@ function ProductsElement({ product }) {
                   rate={averageRating}
                   card={"true"}
                   numOfRatings={numOfReviews}
+                  ratingAvarage={averageRating}
                 />
               </>
             ) : (

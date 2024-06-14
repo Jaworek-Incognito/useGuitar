@@ -1,13 +1,11 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { GrStatusGood, GrStatusWarning } from "react-icons/gr";
-import { Button } from "../ui/Button";
 import { FaCartPlus, FaRegWindowClose } from "react-icons/fa";
 import Span from "../ui/Span";
 import DetailsTable from "../ui/DetailsTable";
-
 import Slider from "react-slick";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Modal from "react-modal";
 import PageNotFound from "../ui/PageNotFound";
 import Spinner from "../ui/Spinner";
@@ -15,7 +13,6 @@ import { useProduct } from "../services/useProduct";
 import Rating from "../ui/Rating";
 import DescriptionFormater from "../ui/DescriptionFormater";
 import Reviews from "../ui/Reviews";
-
 import { useDispatch } from "react-redux";
 import { addItem } from "../utilities/cartSlice";
 import useTitle from "../hooks/useTitle";
@@ -155,15 +152,6 @@ const StyledIcon = styled.span`
   color: inherit;
 `;
 
-const DeliverySpan = styled.span`
-  display: block;
-  font-size: 16px;
-  color: #000;
-  border-bottom: 1px solid #ddd;
-  padding-bottom: 8px;
-  margin-bottom: 16px;
-`;
-
 const DetailsWrapper = styled.div`
   display: grid;
   grid-template-columns: 500px 500px;
@@ -223,6 +211,7 @@ const NoDiscountPriceSpan = styled.span`
 function ProductDetails() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [currImage, setCurrImage] = useState(null);
+
   const dispatch = useDispatch();
 
   const { product, isLoadingProduct, error } = useProduct();
@@ -388,7 +377,7 @@ function ProductDetails() {
               <StyledHeaderTitle>Description</StyledHeaderTitle>
               <DescriptionFormater description={description} />
             </DescriptionWrapper>
-            <Reviews id={id} />
+            <Reviews id={id} averageRating={averageRating} />
           </>
         )}
       </Wrapper>

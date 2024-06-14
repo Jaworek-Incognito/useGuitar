@@ -4,19 +4,32 @@ import { useOrder } from "../../services/useOrder";
 import { OrderTableHeader } from "../../ui/OrderTableHeader";
 import { OrderTableFooter } from "../../ui/OrderTableFooter";
 import { OrderTableRow } from "../../ui/OrderTableRow";
-import { NavLink } from "react-router-dom";
+import { priceConverter } from "../../helpers/priceConverter";
 
 const Wrapper = styled.div`
   margin: 40px 0 80px 0;
   width: 80%;
+  display: flex;
+  flex-wrap: wrap;
 `;
 
 const CustomerContainer = styled.div`
   background-color: #ddd;
   border-radius: 6px;
   padding: 20px 28px;
-  width: max-content;
-  position: relative;
+  width: fit-content;
+`;
+
+const StatusContainer = styled(CustomerContainer)`
+  margin-left: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  text-transform: uppercase;
+  background-color: #065ec0;
+  color: #fff;
 `;
 
 const StyledPar = styled.p`
@@ -25,6 +38,9 @@ const StyledPar = styled.p`
   letter-spacing: 1px;
 `;
 
+const StyledStatusPar = styled(StyledPar)`
+  letter-spacing: 4px;
+`;
 const Table = styled.div`
   margin-top: 20px;
 `;
@@ -60,11 +76,8 @@ const Img = styled.img`
   object-fit: cover;
 `;
 
-const StyledNavLink = styled(NavLink)`
-  display: flex;
-  color: #000;
-  align-items: center;
-  min-height: 40px;
+const StyledSpanName = styled(StyledSpan)`
+  text-transform: uppercase;
 `;
 
 function Order() {
@@ -80,6 +93,10 @@ function Order() {
         <StyledPar>{`${order.address} ${order.postCode} ${order.city} `}</StyledPar>
         <StyledPar>{`${order.phoneNumber} ${order.country} `}</StyledPar>
       </CustomerContainer>
+      <StatusContainer>
+        <StyledStatusPar>Status</StyledStatusPar>
+        <StyledStatusPar>{order.status}</StyledStatusPar>
+      </StatusContainer>
       <Table>
         <OrderTableHeader>
           <StyledSpan></StyledSpan>
@@ -94,11 +111,13 @@ function Order() {
               <Img src={item.image} />
             </StyledColImage>
 
-            <StyledSpan>{item.name}</StyledSpan>
-            <StyledSpanNumer>$ {item.price}</StyledSpanNumer>
+            <StyledSpanName>{item.name}</StyledSpanName>
+            <StyledSpanNumer>$ {priceConverter(item.price)}</StyledSpanNumer>
 
             <StyledSpanNumer>{item.quantity}</StyledSpanNumer>
-            <StyledSpanNumer>$ {item.price * item.quantity}</StyledSpanNumer>
+            <StyledSpanNumer>
+              $ {priceConverter(item.price * item.quantity)}
+            </StyledSpanNumer>
           </OrderTableRow>
         ))}
         <OrderTableFooter>
@@ -106,7 +125,7 @@ function Order() {
             Total price (with delivery cost):
           </StyledSpan>
           <StyledCartPrice style={{ paddingRight: "48px" }}>
-            $ {order.total}
+            $ {priceConverter(order.total)}
           </StyledCartPrice>
         </OrderTableFooter>
       </Table>

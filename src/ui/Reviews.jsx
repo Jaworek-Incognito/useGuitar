@@ -1,11 +1,13 @@
 import styled from "styled-components";
 import TextExpander from "../ui/TextExpander";
-import { Button } from "./Button";
 import { useState } from "react";
 import Rating from "./Rating";
 import Spinner from "./Spinner";
-import { useGetProductReviews } from "../services/useReviews";
+import { useProductReviews } from "../services/useReviews";
 import { useCreateReview } from "../services/useCreateReview";
+import { TiStar } from "react-icons/ti";
+import { useSearchParams } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const StyledButton = styled.button`
   outline: none;
@@ -121,13 +123,66 @@ const ReportButton = styled.button`
   }
 `;
 
-function Reviews({ id: productId }) {
+const ReviewsSummaryContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const ReviewsRatingsContainer = styled.div`
+  flex-basis: 50%;
+  display: grid;
+  grid-template-columns: 250px 100px;
+`;
+
+const ReviewsAvarageRatingContainer = styled.div`
+  flex-basis: 50%;
+  text-align: right;
+  font-size: 40px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+`;
+
+const Row = styled.p`
+  display: flex;
+  font-size: 28px;
+  align-items: center;
+  gap: 6px;
+  /* width: 50%; */
+  padding: 6px 0px 6px 12px;
+  transition: all 0.2s;
+  cursor: pointer;
+  border-radius: 10px;
+  &:hover {
+    background-color: #ddd;
+  }
+`;
+
+const Col = styled.span`
+  display: flex;
+  flex-direction: column;
+  font-size: 28px;
+  align-items: center;
+  gap: 12px;
+  width: 50%;
+  padding: 6px 0px 6px 12px;
+  color: #aaa;
+`;
+
+function Reviews({ id: productId, averageRating }) {
+  const [searchParams, setSearchParams] = useSearchParams();
   const [isWriting, setIsWriting] = useState(false);
   const [newReview, setNewReview] = useState("");
   const [stars, setStars] = useState(null);
 
-  const { reviews, isLoading: isLoadingReviews } =
-    useGetProductReviews(productId);
+  const {
+    reviews,
+    ratingsCount,
+    isLoading: isLoadingReviews,
+  } = useProductReviews(productId);
 
   const { createReview, isPending } = useCreateReview();
 
@@ -136,17 +191,66 @@ function Reviews({ id: productId }) {
     comment: newReview,
   };
 
+  function handleClick(name, value) {
+    searchParams.set(name, value);
+    setSearchParams(searchParams);
+  }
+
   return (
     <Wrapper>
       {isLoadingReviews || isPending ? (
         <Spinner />
       ) : (
         <>
-          <StyledH1>
-            {reviews.length > 0
-              ? `This product has ${reviews.length} reviews`
-              : "This product has not been reviewed yet"}
-          </StyledH1>
+          <Review>
+            <ReviewsSummaryContainer>
+              <ReviewsRatingsContainer>
+                <div>
+                  <Row onClick={() => handleClick("rating", 1)}>
+                    1 <TiStar style={{ color: "#0654ab" }} />
+                  </Row>
+
+                  <Row onClick={() => handleClick("rating", 2)}>
+                    2 <TiStar style={{ color: "#0654ab" }} />
+                    <TiStar style={{ color: "#0654ab" }} />
+                  </Row>
+
+                  <Row onClick={() => handleClick("rating", 3)}>
+                    3 <TiStar style={{ color: "#0654ab" }} />
+                    <TiStar style={{ color: "#0654ab" }} />
+                    <TiStar style={{ color: "#0654ab" }} />
+                  </Row>
+
+                  <Row onClick={() => handleClick("rating", 4)}>
+                    4 <TiStar style={{ color: "#0654ab" }} />
+                    <TiStar style={{ color: "#0654ab" }} />
+                    <TiStar style={{ color: "#0654ab" }} />
+                    <TiStar style={{ color: "#0654ab" }} />
+                  </Row>
+
+                  <Row onClick={() => handleClick("rating", 5)}>
+                    5 <TiStar style={{ color: "#0654ab" }} />
+                    <TiStar style={{ color: "#0654ab" }} />
+                    <TiStar style={{ color: "#0654ab" }} />
+                    <TiStar style={{ color: "#0654ab" }} />
+                    <TiStar style={{ color: "#0654ab" }} />
+                  </Row>
+                </div>
+                <div>
+                  <Col>
+                    {ratingsCount.map((rating) => (
+                      <span key={rating[0]}>{rating[1]}</span>
+                    ))}
+                  </Col>
+                </div>
+              </ReviewsRatingsContainer>
+              <ReviewsAvarageRatingContainer>
+                <span>{averageRating}/5</span>{" "}
+                <TiStar style={{ color: "#0654ab", fontSize: "46px" }} />
+              </ReviewsAvarageRatingContainer>
+            </ReviewsSummaryContainer>
+          </Review>
+
           <Review>
             <ReviewContent>
               {isWriting && (
@@ -172,7 +276,7 @@ function Reviews({ id: productId }) {
                     borderRadius="14px"
                     onClick={() => {
                       if (!newReview || !stars)
-                        return alert("Please provide review and rating");
+                        return toast.error("Please provide review and rating");
                       createReview(
                         { productId, review },
                         {

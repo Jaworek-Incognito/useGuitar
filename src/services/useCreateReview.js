@@ -10,7 +10,13 @@ export function useCreateReview() {
       toast.loading("Creating...");
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["reviews"] });
+      queryClient.refetchQueries({
+        queryKey: ["product"],
+      });
+      queryClient.refetchQueries({
+        queryKey: ["reviews"],
+      });
+
       toast.dismiss();
       toast.success("Review successfully added");
     },
