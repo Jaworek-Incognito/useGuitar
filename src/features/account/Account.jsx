@@ -11,6 +11,9 @@ import { useUser } from "../../services/useUser";
 const Wrapper = styled.div`
   display: grid;
   grid-template-columns: 300px 3fr;
+  @media (max-width: 900px) {
+    display: block;
+  }
 `;
 
 const MenuWrapper = styled.aside`
@@ -18,6 +21,9 @@ const MenuWrapper = styled.aside`
   flex-direction: column;
   height: fit-content;
   margin-top: 160px;
+  @media (max-width: 900px) {
+    margin-top: 0px;
+  }
 `;
 
 const ContentWrapper = styled.div`
@@ -43,6 +49,9 @@ const StyledLi = styled.li`
   transition: color 0.2s;
   &:hover {
     color: #000;
+  }
+  @media (max-width: 900px) {
+    justify-content: center;
   }
 `;
 

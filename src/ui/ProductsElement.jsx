@@ -1,17 +1,14 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import Rating from "./Rating";
-import { TbDiscount } from "react-icons/tb";
-import { MdOutlineDiscount, MdOutlineStarOutline } from "react-icons/md";
+import { MdOutlineDiscount } from "react-icons/md";
 import { priceConverter } from "../helpers/priceConverter";
-import { TiStar } from "react-icons/ti";
 
 const Li = styled.li`
   display: grid;
   grid-template-rows: 320px 1fr;
   border: ${(props) =>
     props.featured ? "1px solid #3D86D8" : "1px solid #ddd"};
-  /* border-radius: 14px; */
   color: #000;
   width: 270px;
   padding: 18px 0;
@@ -24,6 +21,10 @@ const Li = styled.li`
   &:hover {
     border: ${(props) =>
       props.featured ? "1px solid #065EC0" : "1px solid #aaa"};
+  }
+  @media (max-width: 680px) {
+    min-width: 90%;
+    margin: 0 auto;
   }
 `;
 
@@ -54,20 +55,17 @@ const InfoContainer = styled.div`
   grid-template-rows: 2fr 1fr 1fr;
 `;
 
-const P = styled.p`
-  font-size: 16px;
-
-  padding: 6px 10px;
-`;
-
 const Span = styled.span`
-  /* padding-left: 8px; */
   text-align: left;
   font-size: 18px;
   color: #000;
-  /* font-weight: 700; */
   text-transform: uppercase;
   margin: auto 0;
+  @media (max-width: 680px) {
+    font-size: 20px;
+    text-align: center;
+    font-weight: 700;
+  }
 `;
 
 const Price = styled.span`
@@ -75,6 +73,10 @@ const Price = styled.span`
   font-size: 18px;
   font-weight: 700;
   margin: auto 0 auto 4px;
+  @media (max-width: 680px) {
+    text-align: center;
+    font-size: 24px;
+  }
 `;
 
 const DiscountContainer = styled.div`
@@ -89,19 +91,6 @@ const DiscountContainer = styled.div`
   color: #fff;
   display: flex;
   font-size: 14px;
-`;
-
-const FeaturedContainer = styled.div`
-  position: absolute;
-  top: 14px;
-  left: 10px;
-  z-index: 1000;
-  width: fit-content;
-  padding: 2px 8px;
-  margin-top: 6px;
-  color: #065ec0;
-  display: flex;
-  font-size: 16px;
 `;
 
 function ProductsElement({ product }) {

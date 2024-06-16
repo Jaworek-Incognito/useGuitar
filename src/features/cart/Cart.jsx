@@ -2,10 +2,8 @@ import styled from "styled-components";
 import Spinner from "../../ui/Spinner";
 import CartProductsTable from "./CartProductsTable";
 import CartSummary from "./CartSummary";
-
 import EmptyCart from "../../ui/EmptyCart";
 import { useUser } from "../../services/useUser";
-
 import { useCartProducts } from "../../services/useCartProducts";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -18,6 +16,9 @@ const Wrapper = styled.div`
   margin: 40px auto 80px auto;
   width: 100%;
   position: relative;
+  @media (max-width: 1000px) {
+    display: block;
+  }
 `;
 
 const StyledH1 = styled.h1`
@@ -27,6 +28,9 @@ const StyledH1 = styled.h1`
   font-family: "Roboto";
   padding: 6px;
   margin-bottom: 40px;
+  @media (max-width: 800px) {
+    text-align: center;
+  }
 `;
 
 const SummaryContainer = styled.div`
@@ -34,8 +38,11 @@ const SummaryContainer = styled.div`
   width: 80%;
   top: 220px;
   height: 450px;
-  /* background-color: #ddd; */
   margin: 30px auto 0 auto;
+  @media (max-width: 1000px) {
+    position: static;
+    height: max-content;
+  }
 `;
 
 function Cart() {

@@ -21,4 +21,7 @@ export const Input = styled.input`
     background-color: #ddd;
     cursor: not-allowed;
   }
+  @media (max-width: 1280px) {
+    width: 100%;
+  }
 `;

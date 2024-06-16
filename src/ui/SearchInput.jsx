@@ -14,7 +14,7 @@ const StyledInput = styled.input`
   border: 1px solid #ddd;
   font-size: 16px;
   padding: 16px;
-  width: 1000px;
+  width: 75%;
   outline: none;
   margin-bottom: 40px;
   &:focus {

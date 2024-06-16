@@ -11,6 +11,12 @@ const Wrapper = styled.div`
   width: 80%;
   display: flex;
   flex-wrap: wrap;
+  @media (max-width: 900px) {
+    width: 100%;
+  }
+  @media (max-width: 750px) {
+    display: block;
+  }
 `;
 
 const CustomerContainer = styled.div`
@@ -18,6 +24,9 @@ const CustomerContainer = styled.div`
   border-radius: 6px;
   padding: 20px 28px;
   width: fit-content;
+  @media (max-width: 750px) {
+    margin-left: 20px;
+  }
 `;
 
 const StatusContainer = styled(CustomerContainer)`
@@ -26,10 +35,13 @@ const StatusContainer = styled(CustomerContainer)`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 12px;
   text-transform: uppercase;
   background-color: #065ec0;
   color: #fff;
+  @media (max-width: 750px) {
+    margin-left: 20px;
+    margin-top: 20px;
+  }
 `;
 
 const StyledPar = styled.p`
@@ -39,7 +51,8 @@ const StyledPar = styled.p`
 `;
 
 const StyledStatusPar = styled(StyledPar)`
-  letter-spacing: 4px;
+  letter-spacing: 2px;
+  font-size: 16px;
 `;
 const Table = styled.div`
   margin-top: 20px;
@@ -65,6 +78,9 @@ const StyledColImage = styled(StyledSpan)`
   display: flex;
   justify-content: center;
   align-items: center;
+  @media (max-width: 500px) {
+    display: none;
+  }
 `;
 
 const Img = styled.img`
@@ -78,6 +94,12 @@ const Img = styled.img`
 
 const StyledSpanName = styled(StyledSpan)`
   text-transform: uppercase;
+`;
+
+const StyledSpanImage = styled(StyledSpan)`
+  @media (max-width: 500px) {
+    display: none;
+  }
 `;
 
 function Order() {
@@ -96,10 +118,13 @@ function Order() {
       <StatusContainer>
         <StyledStatusPar>Status</StyledStatusPar>
         <StyledStatusPar>{order.status}</StyledStatusPar>
+        <StyledStatusPar>Order id</StyledStatusPar>
+
+        <StyledStatusPar>{order._id}</StyledStatusPar>
       </StatusContainer>
       <Table>
         <OrderTableHeader>
-          <StyledSpan></StyledSpan>
+          <StyledSpanImage></StyledSpanImage>
           <StyledSpan>Name</StyledSpan>
           <StyledSpan>Unit price</StyledSpan>
           <StyledSpan>Amount</StyledSpan>

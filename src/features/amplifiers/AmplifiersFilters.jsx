@@ -54,7 +54,6 @@ const StyledUl = styled.ul`
       : css`
           ${slideIn} .75s forwards
         `};
-  /* border: 2px solid #434545; */
 `;
 
 const StyledUlScrollbarHidden = styled(StyledUl)`
@@ -120,12 +119,6 @@ const StyledLiInput = styled.li`
   align-items: center;
   text-transform: uppercase;
   padding: 16px;
-`;
-
-const StyledSpan = styled.span`
-  font-size: 16px;
-  font-weight: 400;
-  color: #aaa;
 `;
 
 function AmplifiersFilters() {

@@ -5,7 +5,7 @@ import { FaCartPlus, FaRegWindowClose } from "react-icons/fa";
 import Span from "../ui/Span";
 import DetailsTable from "../ui/DetailsTable";
 import Slider from "react-slick";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Modal from "react-modal";
 import PageNotFound from "../ui/PageNotFound";
 import Spinner from "../ui/Spinner";
@@ -24,9 +24,7 @@ const StyledButton = styled.button`
   outline: none;
   cursor: pointer;
   transition: all 0.2s;
-
   border: none;
-
   background-color: #065ec0;
   color: #fff;
   padding: 16px 24px;
@@ -40,12 +38,18 @@ const StyledButton = styled.button`
 const Wrapper = styled.div`
   margin: 0 auto;
   width: 1000px;
+  @media (max-width: 900px) {
+    width: var(--page-width);
+  }
 `;
 
 const Container = styled.div`
   display: grid;
   grid-template-columns: 500px 500px;
   padding-top: 12px;
+  @media (max-width: 900px) {
+    display: block;
+  }
 `;
 
 const StyledH1 = styled.h1`
@@ -100,6 +104,20 @@ const ImageWrapper = styled.div`
 
   border-right: 1px solid #ddd;
   padding: 0 16px;
+  @media (max-width: 900px) {
+    display: none;
+  }
+`;
+
+const ImageWrapperOnMobile = styled.div`
+  margin: 0 auto;
+  display: none;
+  width: 100%;
+
+  @media (max-width: 900px) {
+    display: block;
+    padding-top: 40px;
+  }
 `;
 
 const HeaderWrapper = styled.div`
@@ -111,6 +129,12 @@ const HeaderWrapper = styled.div`
   width: fit-content;
 
   padding: 0 16px;
+
+  @media (max-width: 900px) {
+    margin: 0 auto;
+    padding: 36px 0;
+    height: fit-content;
+  }
 `;
 
 const HeaderContainer = styled.header`
@@ -122,7 +146,6 @@ const ImageContainer = styled.div`
   position: relative;
   height: 600px;
   width: 500px;
-  cursor: pointer;
 `;
 
 const StyledImage = styled.img`
@@ -133,6 +156,14 @@ const StyledImage = styled.img`
   transform: translate(-50%, -50%);
   max-width: 350px;
   max-height: 450px;
+  @media (max-width: 900px) {
+    display: flex;
+    justify-content: center;
+    position: static;
+    transform: none;
+    top: 0%;
+    left: 0%;
+  }
 `;
 
 const StatusSpan = styled.span`
@@ -156,6 +187,9 @@ const DetailsWrapper = styled.div`
   display: grid;
   grid-template-columns: 500px 500px;
   margin: 40px 0 60px 0;
+  @media (max-width: 900px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 const ModalImage = styled.img`
@@ -186,11 +220,14 @@ const ModalCloseButton = styled.div`
 
 const DescriptionWrapper = styled.div`
   font-size: 20px;
-  /* text-align: justify; */
   letter-spacing: 1px;
   font-weight: 300;
   width: 800px;
   margin: 0 auto;
+  @media (max-width: 900px) {
+    width: var(--page-width);
+    padding: 0 20px;
+  }
 `;
 
 const RatingContainer = styled.div`
@@ -288,98 +325,92 @@ function ProductDetails() {
             </Modal>
           </div>
         )}
-        {isLoadingProduct ? (
-          <Spinner />
-        ) : (
-          <>
-            <StyledLink to="/">Home</StyledLink>
-            <LesserHeaderSpan>{` > `}</LesserHeaderSpan>
-            <StyledLink
-              to={`/${
-                category !== "multi effect" ? `${category}s` : "multiEffects"
-              } `}
-            >{`${category}s`}</StyledLink>
-            <LesserHeaderSpan>{` > `}</LesserHeaderSpan>
-            <StyledLink to="">{name}</StyledLink>
-            <Container>
-              <ImageWrapper>
-                <Slider
-                  dots={true}
-                  slidesToShow={1}
-                  arrows={false}
-                  autoplay={true}
-                  autoplaySpeed={3000}
-                  pauseOnDotsHover={true}
-                  pauseOnHover={true}
-                  draggable={false}
-                  infinite={images.length > 1}
-                  focusOnSelect={false}
-                >
-                  {isLoadingProduct ? (
-                    <Spinner />
-                  ) : (
-                    images.map((image, index) => (
-                      <ImageContainer
-                        onClick={() => {
-                          setModalIsOpen(true);
-                          setCurrImage(index);
-                        }}
-                        key={image.imageId}
-                      >
-                        <StyledImage src={image.imageURL} />
-                      </ImageContainer>
-                    ))
-                  )}
-                </Slider>
-              </ImageWrapper>
+        <>
+          <StyledLink to="/">Home</StyledLink>
+          <LesserHeaderSpan>{` > `}</LesserHeaderSpan>
+          <StyledLink
+            to={`/${
+              category !== "multi effect" ? `${category}s` : "multiEffects"
+            } `}
+          >{`${category}s`}</StyledLink>
+          <LesserHeaderSpan>{` > `}</LesserHeaderSpan>
+          <StyledLink to="">{name}</StyledLink>
+          <Container>
+            <ImageWrapperOnMobile>
+              <StyledImage src={images[0].imageURL} />
+            </ImageWrapperOnMobile>
+            <ImageWrapper>
+              <Slider
+                dots={true}
+                slidesToShow={1}
+                arrows={false}
+                autoplay={true}
+                autoplaySpeed={3000}
+                pauseOnDotsHover={true}
+                pauseOnHover={true}
+                draggable={false}
+                infinite={images.length > 1}
+                focusOnSelect={false}
+              >
+                {images.map((image, index) => (
+                  <ImageContainer
+                    onClick={() => {
+                      setModalIsOpen(true);
+                      setCurrImage(index);
+                    }}
+                    key={image.imageId}
+                  >
+                    <StyledImage src={image.imageURL} />
+                  </ImageContainer>
+                ))}
+              </Slider>
+            </ImageWrapper>
+            <HeaderWrapper>
+              <HeaderContainer>
+                <StyledH1>{name}</StyledH1>
+                <PriceContainer>
+                  <Price>
+                    ${priceConverter(price)}
+                    {discount > 1 && (
+                      <NoDiscountPriceSpan>
+                        ${priceConverter(noDiscountPrice)}
+                      </NoDiscountPriceSpan>
+                    )}
+                  </Price>
+                </PriceContainer>
+                <StatusSpan inventory={inventory}>
+                  <StyledIcon>
+                    {inventory > 0 ? <GrStatusGood /> : <GrStatusWarning />}
+                  </StyledIcon>
+                  {inventory > 0 ? "In Stock" : "Out Of Stock"}
+                </StatusSpan>
 
-              <HeaderWrapper>
-                <HeaderContainer>
-                  <StyledH1>{name}</StyledH1>
-                  <PriceContainer>
-                    <Price>
-                      ${priceConverter(price)}
-                      {discount > 1 && (
-                        <NoDiscountPriceSpan>
-                          ${priceConverter(noDiscountPrice)}
-                        </NoDiscountPriceSpan>
-                      )}
-                    </Price>
-                  </PriceContainer>
-                  <StatusSpan inventory={inventory}>
-                    <StyledIcon>
-                      {inventory > 0 ? <GrStatusGood /> : <GrStatusWarning />}
-                    </StyledIcon>
-                    {inventory > 0 ? "In Stock" : "Out Of Stock"}
-                  </StatusSpan>
+                <StyledButton onClick={() => dispatch(addItem(id))}>
+                  <Span padding="0 10px 0 0" color="#fff">
+                    <FaCartPlus />
+                  </Span>
+                  ADD TO CART
+                </StyledButton>
+                <RatingContainer>
+                  <Rating
+                    editable={false}
+                    ratingAvarage={averageRating}
+                    numOfRatings={numOfReviews}
+                  />
+                </RatingContainer>
+              </HeaderContainer>
+            </HeaderWrapper>
 
-                  <StyledButton onClick={() => dispatch(addItem(id))}>
-                    <Span padding="0 10px 0 0" color="#fff">
-                      <FaCartPlus />
-                    </Span>
-                    ADD TO CART
-                  </StyledButton>
-                  <RatingContainer>
-                    <Rating
-                      editable={false}
-                      ratingAvarage={averageRating}
-                      numOfRatings={numOfReviews}
-                    />
-                  </RatingContainer>
-                </HeaderContainer>
-              </HeaderWrapper>
-
-              <DetailsWrapper>
-                <DetailsTable product={product} />
-              </DetailsWrapper>
-            </Container>
-            <DescriptionWrapper>
-              <StyledHeaderTitle>Description</StyledHeaderTitle>
-              <DescriptionFormater description={description} />
-            </DescriptionWrapper>
-            <Reviews id={id} averageRating={averageRating} />
-          </>
-        )}
+            <DetailsWrapper>
+              <DetailsTable product={product} />
+            </DetailsWrapper>
+          </Container>
+          <DescriptionWrapper>
+            <StyledHeaderTitle>Description</StyledHeaderTitle>
+            <DescriptionFormater description={description} />
+          </DescriptionWrapper>
+          <Reviews id={id} averageRating={averageRating} />
+        </>
       </Wrapper>
     </>
   );

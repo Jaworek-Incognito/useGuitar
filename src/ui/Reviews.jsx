@@ -8,14 +8,13 @@ import { useCreateReview } from "../services/useCreateReview";
 import { TiStar } from "react-icons/ti";
 import { useSearchParams } from "react-router-dom";
 import toast from "react-hot-toast";
+import { reportReviewApi } from "../services/apiReviews";
 
 const StyledButton = styled.button`
   outline: none;
   cursor: pointer;
   transition: all 0.2s;
-
   border: none;
-
   background-color: #065ec0;
   color: #fff;
   padding: 16px 24px;
@@ -26,26 +25,13 @@ const StyledButton = styled.button`
   }
 `;
 
-const StyledH1 = styled.h1`
-  display: block;
-  text-align: center;
-  background-color: transparent;
-  font-size: 24px;
-  color: #000;
-  padding: 20px 0 40px 0;
-  letter-spacing: 1px;
-  border-bottom: 1px solid #ddd;
-`;
-
 const Wrapper = styled.div`
   color: #000;
   margin-bottom: 100px;
-  /* border-top: 1px solid #ddd; */
 `;
 
 const Review = styled.div`
   margin: 20px 0;
-  /* border-bottom: 1px solid #eee; */
   color: #000;
   padding: 26px 22px 12px 22px;
   background-color: #eee;
@@ -102,6 +88,9 @@ const Textarea = styled.textarea`
   &:focus {
     outline: 1px solid #ddd;
   }
+  @media (max-width: 900px) {
+    width: 92%;
+  }
 `;
 
 const ReportButtonContainer = styled.div`
@@ -133,6 +122,9 @@ const ReviewsRatingsContainer = styled.div`
   flex-basis: 50%;
   display: grid;
   grid-template-columns: 250px 100px;
+  @media (max-width: 900px) {
+    grid-template-columns: 2fr 1fr;
+  }
 `;
 
 const ReviewsAvarageRatingContainer = styled.div`
@@ -144,6 +136,9 @@ const ReviewsAvarageRatingContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  @media (max-width: 600px) {
+    font-size: 24px;
+  }
 `;
 
 const Row = styled.p`
@@ -151,7 +146,6 @@ const Row = styled.p`
   font-size: 28px;
   align-items: center;
   gap: 6px;
-  /* width: 50%; */
   padding: 6px 0px 6px 12px;
   transition: all 0.2s;
   cursor: pointer;
@@ -316,7 +310,14 @@ function Reviews({ id: productId, averageRating }) {
                   {review.comment}
                 </TextExpander>
                 <ReportButtonContainer>
-                  <ReportButton>report</ReportButton>
+                  <ReportButton
+                    onClick={async () => {
+                      const response = await reportReviewApi(review._id);
+                      toast.success(response);
+                    }}
+                  >
+                    report
+                  </ReportButton>
                 </ReportButtonContainer>
               </ReviewContent>
             </Review>

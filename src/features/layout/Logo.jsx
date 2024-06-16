@@ -8,16 +8,15 @@ import { getCurrentUserApi } from "../../services/apiUser";
 const StyledLogo = styled.header`
   margin: 0 auto;
   width: var(--page-width);
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  color: #fff;
 `;
 
 const StyledImage = styled.img`
   object-fit: cover;
   width: 300px;
   aspect-ratio: 4/2;
+  @media (max-width: 500px) {
+    width: 180px;
+  }
 `;
 
 const Container = styled.div`
@@ -34,6 +33,9 @@ const IconsContainer = styled.div`
   flex-basis: 33%;
   gap: 26px;
   color: #000;
+  @media (max-width: 500px) {
+    gap: 8px;
+  }
 `;
 
 const Wrapper = styled.div`

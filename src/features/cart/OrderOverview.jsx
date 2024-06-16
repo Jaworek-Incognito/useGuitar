@@ -5,7 +5,6 @@ import { useEffect, useState } from "react";
 import { useCartProducts } from "../../services/useCartProducts";
 import Spinner from "../../ui/Spinner";
 import SpinnerMini from "../../ui/SpinnerMini";
-
 import { createValidProductObject } from "../../helpers/createValidProductObject";
 import styled from "styled-components";
 import CartSummary from "./CartSummary";
@@ -31,6 +30,9 @@ const Wrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr 450px;
   position: relative;
+  @media (max-width: 900px) {
+    display: block;
+  }
 `;
 
 const EditButton = styled.button`
@@ -90,6 +92,9 @@ const StyledColImage = styled(StyledSpan)`
   display: flex;
   justify-content: center;
   align-items: center;
+  @media (max-width: 900px) {
+    display: none;
+  }
 `;
 
 const Img = styled.img`
@@ -110,6 +115,9 @@ const PriceSummaryContainer = styled.div`
   border-radius: 16px;
   background-color: #eee;
   margin: 30px auto 0 auto;
+  @media (max-width: 900px) {
+    position: static;
+  }
 `;
 
 const StyledTotalPriceContainer = styled.div`
@@ -144,6 +152,10 @@ const DeliveryRow = styled.div`
   grid-template-columns: 1fr 380px 80px;
   border-top: 1px solid #ddd;
   padding: 18px 16px;
+  @media (max-width: 800px) {
+    grid-template-columns: 35% 50% 15%;
+    padding: 18px 4px;
+  }
 `;
 
 const DeliverySpan = styled.span`
@@ -165,6 +177,12 @@ const StyledNavLink = styled(NavLink)`
   align-items: center;
   min-height: 40px;
   text-transform: uppercase;
+`;
+
+const StyledSpanImage = styled(StyledSpan)`
+  @media (max-width: 900px) {
+    display: none;
+  }
 `;
 
 function OrderOverview() {
@@ -243,7 +261,7 @@ function OrderOverview() {
         </CustomerContainer>
         <Table>
           <OrderTableHeader>
-            <StyledSpan></StyledSpan>
+            <StyledSpanImage></StyledSpanImage>
             <StyledSpan>Name</StyledSpan>
             <StyledSpan>Unit price</StyledSpan>
             <StyledSpan>Amount</StyledSpan>

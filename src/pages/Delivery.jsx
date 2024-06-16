@@ -1,7 +1,6 @@
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { useForm } from "react-hook-form";
-
 import countries from "../utilities/countries";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
@@ -29,10 +28,16 @@ const Wrapper = styled.div`
   margin: 40px auto 80px auto;
   width: 1200px;
   position: relative;
+  @media (max-width: 1280px) {
+    width: 100%;
+  }
 `;
 
 const StyledForm = styled.form`
   padding: 0px 50px 0px 50px;
+  @media (max-width: 1280px) {
+    padding: 0px 20px 0px 20px;
+  }
 `;
 
 const StyledSpan = styled.div`
@@ -41,21 +46,18 @@ const StyledSpan = styled.div`
   border-bottom: 1px solid #f4f4f4;
   font-weight: 300;
   letter-spacing: 1px;
+  @media (max-width: 900px) {
+    font-size: 22px;
+  }
 `;
 
 const FormContainer = styled.div`
   width: 80%;
   margin: 0 auto;
+  @media (max-width: 1280px) {
+    width: 100%;
+  }
 `;
-
-const defaultValues = {
-  firstName: "",
-  lastName: "",
-  address: "",
-  phoneNumber: "",
-  city: "",
-  postCode: "",
-};
 
 function Delivery({ isAccountPage }) {
   const cart = useSelector((state) => state.cart.cartAfterFetch);

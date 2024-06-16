@@ -9,12 +9,20 @@ import { useState } from "react";
 const Wrapper = styled.div`
   display: grid;
   grid-template-columns: 300px 3fr;
+  @media (max-width: 900px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 const MenuWrapper = styled.aside`
   display: flex;
   flex-direction: column;
   height: fit-content;
+  @media (max-width: 900px) {
+    display: block;
+    margin: 0 auto;
+    min-width: 75%;
+  }
 `;
 
 const ProductsWrapper = styled.div`
@@ -35,7 +43,7 @@ function Guitars() {
     <>
       <SearchInput />
       <Wrapper>
-        <MenuWrapper>
+        <MenuWrapper isActive={"true"}>
           <GuitarFilters
             productsNeck={productsNeck}
             productsBody={productsBody}

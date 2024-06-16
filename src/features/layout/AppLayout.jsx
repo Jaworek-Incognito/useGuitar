@@ -4,7 +4,6 @@ import Logo from "./Logo";
 import Menu from "./Menu";
 
 const StyledAppLayout = styled.div`
-  min-height: 100dvh;
   background-color: #fff;
 `;
 
@@ -23,11 +22,25 @@ const StyledMenu = styled.div`
   display: grid;
   grid-template-rows: 1fr 1fr;
   height: 230px;
+  @media (max-width: 1300px) {
+    max-width: 1200px;
+    grid-template-rows: 160px auto;
+  }
+  @media (max-width: 900px) {
+    grid-template-rows: 160px auto;
+    height: auto;
+  }
+  @media (max-width: 500px) {
+    grid-template-rows: 100px auto;
+    height: auto;
+  }
 `;
 
 const Wrapper = styled.div`
   padding: 40px 48px 0px;
-  min-height: 75dvh;
+  @media (max-width: 900px) {
+    padding: 40px 0 20px 0;
+  }
 `;
 
 const Main = styled.main`

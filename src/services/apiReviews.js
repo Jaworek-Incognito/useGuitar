@@ -26,3 +26,13 @@ export async function createReviewApi({ productId, review }) {
     throw new Error(error.response.data.msg);
   }
 }
+
+export async function reportReviewApi(id) {
+  const url = `${baseUrl}/reviews/report/${id}`;
+  try {
+    const response = await axios.patch(url);
+    return response.data.msg;
+  } catch (error) {
+    throw new Error(error.response.data.msg);
+  }
+}

@@ -16,4 +16,8 @@ export const Select = styled.select`
     background-color: #ddd;
     cursor: not-allowed;
   }
+  @media (max-width: 1280px) {
+    width: 100%;
+    padding: 10px 16px;
+  }
 `;

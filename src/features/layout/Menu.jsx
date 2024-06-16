@@ -8,6 +8,14 @@ const UnorderedList = styled.ul`
   height: 100%;
   justify-content: center;
   list-style-type: none;
+
+  @media (max-width: 900px) {
+    height: fit-content;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    background-color: #000;
+  }
 `;
 
 const ListElement = styled.li`

@@ -24,4 +24,7 @@ export const Button = styled.button`
     background-color: #0654ab;
     cursor: not-allowed;
   }
+  @media (max-width: 900px) {
+    padding: 8px 16px;
+  }
 `;

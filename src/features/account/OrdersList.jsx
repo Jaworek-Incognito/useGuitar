@@ -15,7 +15,13 @@ const TableHeader = styled.div`
   font-weight: 300;
   text-transform: uppercase;
   border-bottom: 1px solid #aaa;
-  padding: 10px 40px 10px 0;
+  padding: 10px 10px 10px 0;
+  @media (max-width: 1280px) {
+    grid-template-columns: 33% 33% 33%;
+    width: 100%;
+    min-width: 100%;
+    padding: 26px 0px 26px 6px;
+  }
 `;
 
 const StyledNav = styled(NavLink)`
@@ -31,6 +37,13 @@ const StyledNav = styled(NavLink)`
 const Table = styled.div`
   width: 1200px;
   margin-top: 60px;
+  @media (max-width: 1280px) {
+    width: 100%;
+  }
+  @media (max-width: 900px) {
+    width: 100%;
+    margin-top: 40px;
+  }
 `;
 
 const TableRow = styled.div`
@@ -41,11 +54,17 @@ const TableRow = styled.div`
   width: 940px;
   font-weight: 700;
   letter-spacing: 1px;
-  padding: 26px 40px 26px 0;
+  padding: 26px 10px 26px 0;
   border-bottom: 1px solid #eee;
   transition: all 0.18s;
   &:hover {
     background-color: #eee;
+  }
+  @media (max-width: 1280px) {
+    grid-template-columns: 33% 33% 33%;
+    width: 100%;
+    min-width: 100%;
+    padding: 26px 0px 26px 6px;
   }
 `;
 
@@ -53,6 +72,12 @@ const StyledSpan = styled.span`
   display: flex;
   align-items: center;
   justify-content: center;
+`;
+
+const StyledSpanId = styled(StyledSpan)`
+  @media (max-width: 1280px) {
+    display: none;
+  }
 `;
 
 function OrdersList({ user }) {
@@ -65,7 +90,7 @@ function OrdersList({ user }) {
   return (
     <Table>
       <TableHeader>
-        <StyledSpan>order id</StyledSpan>
+        <StyledSpanId>order id</StyledSpanId>
         <StyledSpan>total price</StyledSpan>
         <StyledSpan>status</StyledSpan>
         <StyledSpan>order accepted</StyledSpan>
@@ -73,7 +98,7 @@ function OrdersList({ user }) {
       {orders.map((order) => (
         <StyledNav key={order._id} to={`order/${order._id}`}>
           <TableRow>
-            <StyledSpan>{order._id}</StyledSpan>
+            <StyledSpanId>{order._id}</StyledSpanId>
             <StyledSpan>$ {priceConverter(order.total)}</StyledSpan>
             <StyledSpan>{order.status}</StyledSpan>
             <StyledSpan>{order.createdAt.split("T")[0]}</StyledSpan>

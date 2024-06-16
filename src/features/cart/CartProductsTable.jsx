@@ -20,6 +20,10 @@ const StyledRow = styled.div`
   padding: 26px 6px;
   margin: 0 auto;
   background-color: #fff;
+  @media (max-width: 800px) {
+    grid-template-columns: 40% 20% 25% 15%;
+    width: 100%;
+  }
 `;
 
 const StyledCol = styled.span`
@@ -67,6 +71,9 @@ const StyledColImage = styled(StyledCol)`
   align-items: center;
   background-color: #fff;
   margin-right: 20px;
+  @media (max-width: 800px) {
+    display: none;
+  }
 `;
 
 const Img = styled.img`

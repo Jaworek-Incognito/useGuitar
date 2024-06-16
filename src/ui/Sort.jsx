@@ -7,6 +7,11 @@ const SortWrapper = styled.div`
   justify-content: flex-end;
   gap: 10px;
   align-items: center;
+  @media (max-width: 900px) {
+    margin: 0 auto;
+    justify-content: center;
+    padding-top: 22px;
+  }
 `;
 
 const Select = styled.select`

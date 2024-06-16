@@ -8,8 +8,12 @@ const Ul = styled.ul`
   list-style-type: none;
   display: flex;
   flex-wrap: wrap;
-
   color: #fff;
+  @media (max-width: 700px) {
+    display: block;
+    margin: 0 auto;
+    width: 100%;
+  }
 `;
 
 const StyledH1 = styled.h1`
@@ -19,6 +23,9 @@ const StyledH1 = styled.h1`
   font-family: "Roboto";
   padding: 6px;
   margin-bottom: 40px;
+  @media (max-width: 700px) {
+    text-align: center;
+  }
 `;
 
 function Home() {

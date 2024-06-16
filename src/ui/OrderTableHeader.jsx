@@ -13,4 +13,10 @@ export const OrderTableHeader = styled.div`
   background-color: #eee;
   height: 60px;
   width: 100%;
+  @media (max-width: 1000px) {
+    grid-template-columns: 80px 1fr 140px 70px 130px;
+  }
+  @media (max-width: 800px) {
+    grid-template-columns: 35% 20% 20% 25%;
+  }
 `;

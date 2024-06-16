@@ -12,6 +12,17 @@ const StyledForm = styled.form`
   min-width: 800px;
   margin: 100px auto 0px auto;
   padding: 0px 50px 0px 50px;
+  @media (max-width: 1280px) {
+    width: 100%;
+    min-width: 100%;
+    padding: 0px 20px 0px 20px;
+  }
+  @media (max-width: 900px) {
+    width: 80%;
+    min-width: 80%;
+    margin: 20px auto 0 auto;
+    padding: 0px 20px 0px 20px;
+  }
 `;
 
 const StyledSpan = styled.div`
@@ -20,6 +31,9 @@ const StyledSpan = styled.div`
   border-bottom: 1px solid #f4f4f4;
   font-weight: 300;
   letter-spacing: 1px;
+  @media (max-width: 900px) {
+    font-size: 22px;
+  }
 `;
 
 function ChangePassword() {
