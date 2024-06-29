@@ -1,4 +1,3 @@
-import styled, { css, keyframes } from "styled-components";
 import { FaRegSquarePlus } from "react-icons/fa6";
 import { FaRegMinusSquare } from "react-icons/fa";
 import { HiOutlineArrowNarrowRight } from "react-icons/hi";
@@ -6,126 +5,19 @@ import { IoMdCheckbox } from "react-icons/io";
 import { MdCheckBoxOutlineBlank } from "react-icons/md";
 import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
-
-const slideOut = keyframes`
-    from {max-height: 0;}
-    to {max-height: 300px;}
-
-`;
-const slideIn = keyframes`
-    from {max-height: 300px;}
-    to {max-height: 0;}
-
-`;
-
-const HeaderWrapper = styled.div`
-  display: flex;
-  border-bottom: 1px solid #aaa;
-  cursor: pointer;
-`;
-
-const IconWrapper = styled.div`
-  font-size: 22px;
-  margin: auto;
-  cursor: pointer;
-`;
-
-const StyledH1 = styled.h1`
-  display: flex;
-  text-transform: uppercase;
-  font-size: 18px;
-  padding: 14px 0 20px 0;
-  flex-grow: 1;
-  justify-content: flex-start;
-`;
-
-const StyledUl = styled.ul`
-  list-style-type: none;
-  overflow-y: auto;
-  scrollbar-color: #000 #fff;
-  scrollbar-width: thin;
-  scrollbar-gutter: stable;
-
-  animation: ${(props) =>
-    props.animation
-      ? css`
-          ${slideOut} .9s forwards
-        `
-      : css`
-          ${slideIn} .75s forwards
-        `};
-`;
-
-const StyledUlScrollbarHidden = styled(StyledUl)`
-  overflow-y: hidden;
-  scrollbar-gutter: unset;
-  animation: ${(props) =>
-    props.animation
-      ? css`
-          ${slideOut} 1.4s forwards
-        `
-      : css`
-          ${slideIn} .6s forwards
-        `};
-`;
-
-const StyledUlCategories = styled(StyledUl)`
-  overflow-y: hidden;
-  scrollbar-gutter: unset;
-`;
-
-const StyledLi = styled.li`
-  display: flex;
-  align-items: center;
-  text-transform: uppercase;
-`;
-
-const StyledButton = styled.button`
-  font-family: "Lato";
-  background-color: transparent;
-  border: none;
-  outline: none;
-  color: #434545;
-  text-transform: uppercase;
-  font-size: 16px;
-  padding: 12px;
-  font-weight: 700;
-  cursor: pointer;
-  width: 75%;
-  text-align: left;
-  transition: color 0.2s;
-  flex-grow: 1;
-  &:hover {
-    color: #000;
-  }
-`;
-
-const StyledInput = styled.input`
-  background-color: #fff;
-  color: #000;
-  border: 1px solid #ddd;
-  font-size: 16px;
-  padding: 8px;
-  width: 80px;
-  outline: none;
-  &:focus {
-    border: 1px solid #555;
-  }
-`;
-
-const StyledLiInput = styled.li`
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  text-transform: uppercase;
-  padding: 16px;
-`;
-
-const StyledSpan = styled.span`
-  font-size: 16px;
-  font-weight: 400;
-  color: #aaa;
-`;
+import {
+  StyledUl,
+  StyledUlCategories,
+  StyledUlScrollbarHidden,
+  HeaderWrapper,
+  IconWrapper,
+  StyledH1,
+  StyledLi,
+  StyledButton,
+  StyledLiInput,
+  StyledInput,
+  StyledSpan,
+} from "../../ui/FiltersUI";
 
 function GuitarFilters({ productsNeck, productsBody, setCurrPage }) {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -204,7 +96,7 @@ function GuitarFilters({ productsNeck, productsBody, setCurrPage }) {
               style={{
                 color:
                   searchParams.get("subcategory") === "electric guitar" &&
-                  "#000",
+                  "var(--secondary-font-color)",
               }}
             >
               electric guitars
@@ -221,7 +113,8 @@ function GuitarFilters({ productsNeck, productsBody, setCurrPage }) {
             <StyledButton
               style={{
                 color:
-                  searchParams.get("subcategory") === "bass guitar" && "#000",
+                  searchParams.get("subcategory") === "bass guitar" &&
+                  "var(--secondary-font-color)",
               }}
             >
               bass guitars
@@ -241,7 +134,7 @@ function GuitarFilters({ productsNeck, productsBody, setCurrPage }) {
               style={{
                 color:
                   searchParams.get("subcategory") === "acoustic guitar" &&
-                  "#000",
+                  "var(--secondary-font-color)",
               }}
             >
               acoustic guitars
@@ -261,7 +154,7 @@ function GuitarFilters({ productsNeck, productsBody, setCurrPage }) {
               style={{
                 color:
                   searchParams.get("subcategory") === "classical guitar" &&
-                  "#000",
+                  "var(--secondary-font-color)",
               }}
             >
               classical guitars
@@ -328,7 +221,9 @@ function GuitarFilters({ productsNeck, productsBody, setCurrPage }) {
               >
                 <StyledButton
                   style={{
-                    color: searchParams.get("body") === `${body[0]}` && "#000",
+                    color:
+                      searchParams.get("body") === `${body[0]}` &&
+                      "var(--secondary-font-color)",
                   }}
                 >
                   {
@@ -368,7 +263,9 @@ function GuitarFilters({ productsNeck, productsBody, setCurrPage }) {
               >
                 <StyledButton
                   style={{
-                    color: searchParams.get("neck") === `${neck[0]}` && "#000",
+                    color:
+                      searchParams.get("neck") === `${neck[0]}` &&
+                      "var(--secondary-font-color)",
                   }}
                 >
                   {
@@ -476,7 +373,9 @@ function GuitarFilters({ productsNeck, productsBody, setCurrPage }) {
           <StyledLi onClick={() => handleClick("pickupsActive", "true")}>
             <StyledButton
               style={{
-                color: searchParams.get("pickupsActive") === "true" && "#000",
+                color:
+                  searchParams.get("pickupsActive") === "true" &&
+                  "var(--secondary-font-color)",
               }}
             >
               yes
@@ -492,7 +391,9 @@ function GuitarFilters({ productsNeck, productsBody, setCurrPage }) {
           <StyledLi onClick={() => handleClick("pickupsActive", "false")}>
             <StyledButton
               style={{
-                color: searchParams.get("pickupsActive") === "false" && "#000",
+                color:
+                  searchParams.get("pickupsActive") === "false" &&
+                  "var(--secondary-font-color)",
               }}
             >
               no
@@ -526,7 +427,9 @@ function GuitarFilters({ productsNeck, productsBody, setCurrPage }) {
           <StyledLi onClick={() => handleClick("tremolo", "true")}>
             <StyledButton
               style={{
-                color: searchParams.get("tremolo") === "true" && "#000",
+                color:
+                  searchParams.get("tremolo") === "true" &&
+                  "var(--secondary-font-color)",
               }}
             >
               yes
@@ -542,7 +445,9 @@ function GuitarFilters({ productsNeck, productsBody, setCurrPage }) {
           <StyledLi onClick={() => handleClick("tremolo", "false")}>
             <StyledButton
               style={{
-                color: searchParams.get("tremolo") === "false" && "#000",
+                color:
+                  searchParams.get("tremolo") === "false" &&
+                  "var(--secondary-font-color)",
               }}
             >
               no
@@ -575,7 +480,9 @@ function GuitarFilters({ productsNeck, productsBody, setCurrPage }) {
           <StyledLi onClick={() => handleClick("lefthanded", "true")}>
             <StyledButton
               style={{
-                color: searchParams.get("lefthanded") === "true" && "#000",
+                color:
+                  searchParams.get("lefthanded") === "true" &&
+                  "var(--secondary-font-color)",
               }}
             >
               yes
@@ -591,7 +498,9 @@ function GuitarFilters({ productsNeck, productsBody, setCurrPage }) {
           <StyledLi onClick={() => handleClick("lefthanded", "false")}>
             <StyledButton
               style={{
-                color: searchParams.get("lefthanded") === "false" && "#000",
+                color:
+                  searchParams.get("lefthanded") === "false" &&
+                  "var(--secondary-font-color)",
               }}
             >
               no
@@ -624,7 +533,9 @@ function GuitarFilters({ productsNeck, productsBody, setCurrPage }) {
           <StyledLi onClick={() => handleClick("pickups", "H")}>
             <StyledButton
               style={{
-                color: searchParams.get("pickups") === "H" && "#000",
+                color:
+                  searchParams.get("pickups") === "H" &&
+                  "var(--secondary-font-color)",
               }}
             >
               H
@@ -640,7 +551,9 @@ function GuitarFilters({ productsNeck, productsBody, setCurrPage }) {
           <StyledLi onClick={() => handleClick("pickups", "HH")}>
             <StyledButton
               style={{
-                color: searchParams.get("pickups") === "HH" && "#000",
+                color:
+                  searchParams.get("pickups") === "HH" &&
+                  "var(--secondary-font-color)",
               }}
             >
               HH
@@ -656,7 +569,9 @@ function GuitarFilters({ productsNeck, productsBody, setCurrPage }) {
           <StyledLi onClick={() => handleClick("pickups", "HHH")}>
             <StyledButton
               style={{
-                color: searchParams.get("pickups") === "HHH" && "#000",
+                color:
+                  searchParams.get("pickups") === "HHH" &&
+                  "var(--secondary-font-color)",
               }}
             >
               HHH
@@ -672,7 +587,9 @@ function GuitarFilters({ productsNeck, productsBody, setCurrPage }) {
           <StyledLi onClick={() => handleClick("pickups", "S")}>
             <StyledButton
               style={{
-                color: searchParams.get("pickups") === "S" && "#000",
+                color:
+                  searchParams.get("pickups") === "S" &&
+                  "var(--secondary-font-color)",
               }}
             >
               S
@@ -688,7 +605,9 @@ function GuitarFilters({ productsNeck, productsBody, setCurrPage }) {
           <StyledLi onClick={() => handleClick("pickups", "SS")}>
             <StyledButton
               style={{
-                color: searchParams.get("pickups") === "SS" && "#000",
+                color:
+                  searchParams.get("pickups") === "SS" &&
+                  "var(--secondary-font-color)",
               }}
             >
               SS
@@ -704,7 +623,9 @@ function GuitarFilters({ productsNeck, productsBody, setCurrPage }) {
           <StyledLi onClick={() => handleClick("pickups", "SSS")}>
             <StyledButton
               style={{
-                color: searchParams.get("pickups") === "SSS" && "#000",
+                color:
+                  searchParams.get("pickups") === "SSS" &&
+                  "var(--secondary-font-color)",
               }}
             >
               SSS
@@ -720,7 +641,9 @@ function GuitarFilters({ productsNeck, productsBody, setCurrPage }) {
           <StyledLi onClick={() => handleClick("pickups", "HS")}>
             <StyledButton
               style={{
-                color: searchParams.get("pickups") === "HS" && "#000",
+                color:
+                  searchParams.get("pickups") === "HS" &&
+                  "var(--secondary-font-color)",
               }}
             >
               HS
@@ -736,7 +659,9 @@ function GuitarFilters({ productsNeck, productsBody, setCurrPage }) {
           <StyledLi onClick={() => handleClick("pickups", "HHS")}>
             <StyledButton
               style={{
-                color: searchParams.get("pickups") === "HHS" && "#000",
+                color:
+                  searchParams.get("pickups") === "HHS" &&
+                  "var(--secondary-font-color)",
               }}
             >
               HHS

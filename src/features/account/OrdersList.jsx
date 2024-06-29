@@ -14,8 +14,9 @@ const TableHeader = styled.div`
   letter-spacing: 2px;
   font-weight: 300;
   text-transform: uppercase;
-  border-bottom: 1px solid #aaa;
+  border-bottom: 1px solid var(--primary-border-color);
   padding: 10px 10px 10px 0;
+  color: var(--primary-font-color);
   @media (max-width: 1280px) {
     grid-template-columns: 33% 33% 33%;
     width: 100%;
@@ -55,10 +56,11 @@ const TableRow = styled.div`
   font-weight: 700;
   letter-spacing: 1px;
   padding: 26px 10px 26px 0;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid var(--primary-border-color);
   transition: all 0.18s;
+  color: var(--secondary-font-color);
   &:hover {
-    background-color: #eee;
+    background-color: var(--primary-border-color);
   }
   @media (max-width: 1280px) {
     grid-template-columns: 33% 33% 33%;

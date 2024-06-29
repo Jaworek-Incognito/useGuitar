@@ -12,6 +12,8 @@ const Wrapper = styled.div`
 const Arrow = styled.span`
   font-size: 20px;
   cursor: pointer;
+  margin-top: 4px;
+  color: var(--primary-font-color);
 `;
 
 const Li = styled.li`
@@ -19,7 +21,10 @@ const Li = styled.li`
   list-style: none;
   margin: 6px;
   cursor: pointer;
-  color: ${(props) => (props.active === "true" ? "#000" : "#ddd")};
+
+  color: ${(props) =>
+    props.active === "true" ? "#065ec0" : "var(--primary-font-color)"};
+  font-weight: ${(props) => (props.active === "true" ? "700" : "300")};
 `;
 
 function Pagination({ productsCount, currPage, setCurrPage }) {

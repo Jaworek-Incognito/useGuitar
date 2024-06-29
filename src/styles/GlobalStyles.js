@@ -1,13 +1,35 @@
 import { createGlobalStyle } from "styled-components";
+// --main-wrapper-bg-color: #0f131b;
+// --primary-bg-color: #181C28;
+// --primary-border-color: #2f3135;
+// --primary-font-color: #afb0b2;
+// --secondary-font-color: #e9e9e9;
+// --secondary-bg-color: #065ec0;
+// --secondary-bg-hover-color: #0654ab;
+
+// --main-wrapper-bg-color: #fff;
+// --primary-bg-color: #eee;
+// --primary-border-color: #eee;
+// --primary-font-color: #000;
+// --secondary-font-color: #000;
+// --secondary-bg-color: #065ec0;
+// --secondary-bg-hover-color: #0654ab;
 
 const GlobalStyles = createGlobalStyle`
 :root {
 	--page-width: 75vw;
-
+	
+--main-wrapper-bg-color: #0f131b;
+--primary-bg-color: #181C28;
+--primary-bg-hover-color: #1D2230;
+--primary-border-color: #2f3135;
+--primary-font-color: #afb0b2;
+--secondary-font-color: #e9e9e9;
+--secondary-bg-color: #065ec0;
+--secondary-bg-hover-color: #0654ab;
 	@media (max-width: 1300px ) {
 		--page-width: 100%;
 	}
-
 
 }
 html, body, div, span, applet, object, iframe,
@@ -29,7 +51,6 @@ time, mark, audio, video, input {
 	vertical-align: baseline;
     font-family: 'Lato';
 	box-sizing: border-box;
-	scrollbar-color: #fff;
 	text-decoration: none;
 
 }

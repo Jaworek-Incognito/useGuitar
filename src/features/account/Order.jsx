@@ -20,7 +20,8 @@ const Wrapper = styled.div`
 `;
 
 const CustomerContainer = styled.div`
-  background-color: #ddd;
+  background-color: var(--primary-bg-color);
+  color: var(--primary-font-color);
   border-radius: 6px;
   padding: 20px 28px;
   width: fit-content;
@@ -36,8 +37,8 @@ const StatusContainer = styled(CustomerContainer)`
   align-items: center;
   justify-content: center;
   text-transform: uppercase;
-  background-color: #065ec0;
-  color: #fff;
+  background-color: var(--primary-bg-color);
+  color: var(--secondary-font-color);
   @media (max-width: 750px) {
     margin-left: 20px;
     margin-top: 20px;
@@ -116,11 +117,10 @@ function Order() {
         <StyledPar>{`${order.phoneNumber} ${order.country} `}</StyledPar>
       </CustomerContainer>
       <StatusContainer>
+        <StyledStatusPar>Order id</StyledStatusPar>
+        <StyledStatusPar>{order._id}</StyledStatusPar>
         <StyledStatusPar>Status</StyledStatusPar>
         <StyledStatusPar>{order.status}</StyledStatusPar>
-        <StyledStatusPar>Order id</StyledStatusPar>
-
-        <StyledStatusPar>{order._id}</StyledStatusPar>
       </StatusContainer>
       <Table>
         <OrderTableHeader>

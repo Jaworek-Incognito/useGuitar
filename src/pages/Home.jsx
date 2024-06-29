@@ -23,6 +23,7 @@ const StyledH1 = styled.h1`
   font-family: "Roboto";
   padding: 6px;
   margin-bottom: 40px;
+  color: var(--primary-font-color);
   @media (max-width: 700px) {
     text-align: center;
   }

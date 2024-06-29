@@ -26,15 +26,16 @@ const StyledButton = styled.button`
 `;
 
 const Wrapper = styled.div`
-  color: #000;
-  margin-bottom: 100px;
+  color: #e9e9e9;
+  padding-bottom: 40px;
 `;
 
 const Review = styled.div`
-  margin: 20px 0;
-  color: #000;
+  margin: 40px 0 0 0;
+  color: #e9e9e9;
   padding: 26px 22px 12px 22px;
-  background-color: #eee;
+  background-color: var(--primary-bg-color);
+  border: 1px solid var(--primary-border-color);
   border-radius: 18px;
 `;
 
@@ -48,11 +49,11 @@ const ReviewHeader = styled.header`
   height: 40px;
   padding: 0px 10px 22px 10px;
   letter-spacing: 2px;
-  border-bottom: 1px solid #000;
+  border-bottom: 1px solid var(--primary-border-color);
 `;
 
 const Span = styled.span`
-  color: #000;
+  color: #e9e9e9;
 `;
 
 const DateSpan = styled(Span)`
@@ -79,14 +80,15 @@ const Textarea = styled.textarea`
   width: 900px;
   height: 200px;
   resize: none;
+  color: #e9e9e9;
   margin-bottom: 12px;
   font-size: 16px;
   font-weight: 300;
-  background-color: #eee;
-  border: 1px solid #ddd;
+  background-color: #131418;
+  border: 1px solid var(--primary-border-color);
   padding: 16px;
   &:focus {
-    outline: 1px solid #ddd;
+    outline: 1px solid var(--primary-border-color);
   }
   @media (max-width: 900px) {
     width: 92%;
@@ -107,6 +109,7 @@ const ReportButton = styled.button`
   font-weight: 700;
   opacity: 0;
   transition: all 0.2s;
+  background-color: transparent;
   ${Review}:hover & {
     opacity: 1;
   }
@@ -122,6 +125,7 @@ const ReviewsRatingsContainer = styled.div`
   flex-basis: 50%;
   display: grid;
   grid-template-columns: 250px 100px;
+
   @media (max-width: 900px) {
     grid-template-columns: 2fr 1fr;
   }
@@ -150,8 +154,9 @@ const Row = styled.p`
   transition: all 0.2s;
   cursor: pointer;
   border-radius: 10px;
+
   &:hover {
-    background-color: #ddd;
+    background-color: var(--primary-bg-hover-color);
   }
 `;
 
@@ -163,7 +168,7 @@ const Col = styled.span`
   gap: 12px;
   width: 50%;
   padding: 6px 0px 6px 12px;
-  color: #aaa;
+  color: var(--primary-border-color);
 `;
 
 function Reviews({ id: productId, averageRating }) {

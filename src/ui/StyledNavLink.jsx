@@ -21,16 +21,16 @@ export const StyledNavLink = styled(NavLink).attrs({ activeclass })`
     }
   }
   &:hover {
-    color: #2f3135;
+    color: #e9e9e9;
     @media (max-width: 900px) {
-      color: #fff;
+      color: #e9e9e9;
     }
   }
   &.${activeclass} {
-    color: #000;
-    border-bottom: 2px #2f3135 solid;
+    color: #e9e9e9;
+    border-bottom: 2px #afb0b2 solid;
     @media (max-width: 900px) {
-      color: #fff;
+      color: #e9e9e9;
       border-bottom: none;
     }
   }

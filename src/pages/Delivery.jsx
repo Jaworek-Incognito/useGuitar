@@ -22,6 +22,7 @@ const StyledH1 = styled.h1`
   font-family: "Roboto";
   padding: 6px;
   margin-bottom: 40px;
+  color: var(--primary-font-color);
 `;
 
 const Wrapper = styled.div`
@@ -43,9 +44,10 @@ const StyledForm = styled.form`
 const StyledSpan = styled.div`
   margin-top: 10px;
   padding: 0 0 6px 6px;
-  border-bottom: 1px solid #f4f4f4;
+  border-bottom: 1px solid var(--primary-border-color);
   font-weight: 300;
   letter-spacing: 1px;
+  color: var(--primary-font-color);
   @media (max-width: 900px) {
     font-size: 22px;
   }

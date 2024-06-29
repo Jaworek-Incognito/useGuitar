@@ -1,5 +1,6 @@
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
+import GlobalStyles from "../styles/GlobalStyles";
 
 const Wrapper = styled.div`
   min-height: 100dvh;
@@ -33,15 +34,19 @@ const Container = styled.div`
   padding-bottom: 240px;
 `;
 
-function PageNotFound() {
+function ErrorFallback({ error }) {
+  console.log(error);
   return (
-    <Wrapper>
-      <StyledNavLink to={"/"}>
-        <Img src="https://res.cloudinary.com/dlartwnnr/image/upload/v1715989024/logo-white-no-background_yb7i1k.svg" />
-      </StyledNavLink>
-      <Container>Page not found :(</Container>
-    </Wrapper>
+    <>
+      <GlobalStyles />
+      <Wrapper>
+        <StyledNavLink to={"/"}>
+          <Img src="https://res.cloudinary.com/dlartwnnr/image/upload/v1715989024/logo-white-no-background_yb7i1k.svg" />
+        </StyledNavLink>
+        <Container>Something went wrong :(</Container>
+      </Wrapper>
+    </>
   );
 }
 
-export default PageNotFound;
+export default ErrorFallback;

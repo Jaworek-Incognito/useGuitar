@@ -5,13 +5,13 @@ const InputContainer = styled.div`
   margin: 0 0 40px 0;
   display: flex;
   justify-content: center;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid var(--primary-border-color);
 `;
 
 const StyledInput = styled.input`
-  background-color: #fff;
-  color: #000;
-  border: 1px solid #ddd;
+  background-color: var(--primary-bg-color);
+  color: #afb0b2;
+  border: 1px solid var(--primary-border-color);
   font-size: 16px;
   padding: 16px;
   width: 75%;

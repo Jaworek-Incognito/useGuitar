@@ -12,6 +12,7 @@ const CostContainer = styled.div`
 const StyledSpan = styled.span`
   font-size: 20px;
   letter-spacing: 1px;
+  color: var(--secondary-font-color);
 `;
 
 const StyledCost = styled(StyledSpan)`

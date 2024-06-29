@@ -1,4 +1,3 @@
-import styled, { css, keyframes } from "styled-components";
 import { FaRegSquarePlus } from "react-icons/fa6";
 import { FaRegMinusSquare } from "react-icons/fa";
 import { HiOutlineArrowNarrowRight } from "react-icons/hi";
@@ -6,120 +5,17 @@ import { IoMdCheckbox } from "react-icons/io";
 import { MdCheckBoxOutlineBlank } from "react-icons/md";
 import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
-
-const slideOut = keyframes`
-    from {max-height: 0;}
-    to {max-height: 300px;}
-
-`;
-const slideIn = keyframes`
-    from {max-height: 300px;}
-    to {max-height: 0;}
-
-`;
-
-const HeaderWrapper = styled.div`
-  display: flex;
-  border-bottom: 1px solid #aaa;
-  cursor: pointer;
-`;
-
-const IconWrapper = styled.div`
-  font-size: 22px;
-  margin: auto;
-  cursor: pointer;
-`;
-
-const StyledH1 = styled.h1`
-  display: flex;
-  text-transform: uppercase;
-  font-size: 18px;
-  padding: 14px 0 20px 0;
-  flex-grow: 1;
-  justify-content: flex-start;
-`;
-
-const StyledUl = styled.ul`
-  list-style-type: none;
-  overflow-y: auto;
-  scrollbar-color: #000 #fff;
-  scrollbar-width: thin;
-  scrollbar-gutter: stable;
-
-  animation: ${(props) =>
-    props.animation
-      ? css`
-          ${slideOut} .9s forwards
-        `
-      : css`
-          ${slideIn} .75s forwards
-        `};
-`;
-
-const StyledUlScrollbarHidden = styled(StyledUl)`
-  overflow-y: hidden;
-  scrollbar-gutter: unset;
-  animation: ${(props) =>
-    props.animation
-      ? css`
-          ${slideOut} 1.4s forwards
-        `
-      : css`
-          ${slideIn} .6s forwards
-        `};
-`;
-
-const StyledUlCategories = styled(StyledUl)`
-  overflow-y: hidden;
-  scrollbar-gutter: unset;
-`;
-
-const StyledLi = styled.li`
-  display: flex;
-  align-items: center;
-  text-transform: uppercase;
-`;
-
-const StyledButton = styled.button`
-  font-family: "Lato";
-  background-color: transparent;
-  border: none;
-  outline: none;
-  color: #434545;
-  text-transform: uppercase;
-  font-size: 16px;
-  padding: 12px;
-  font-weight: 700;
-  cursor: pointer;
-  width: 75%;
-  text-align: left;
-  transition: color 0.2s;
-  flex-grow: 1;
-  &:hover {
-    color: #000;
-  }
-`;
-
-const StyledInput = styled.input`
-  background-color: #fff;
-  color: #000;
-  border: 1px solid #ddd;
-  font-size: 16px;
-  padding: 8px;
-  width: 80px;
-  outline: none;
-  &:focus {
-    border: 1px solid #555;
-  }
-`;
-
-const StyledLiInput = styled.li`
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  text-transform: uppercase;
-  padding: 16px;
-`;
+import {
+  HeaderWrapper,
+  IconWrapper,
+  StyledButton,
+  StyledH1,
+  StyledInput,
+  StyledLi,
+  StyledLiInput,
+  StyledUlCategories,
+  StyledUlScrollbarHidden,
+} from "../../ui/FiltersUI";
 
 function AmplifiersFilters() {
   const [searchParams, setSearchParams] = useSearchParams();

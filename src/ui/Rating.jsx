@@ -10,18 +10,20 @@ const Star = styled.span`
   font-size: ${(props) => (props.card ? "20px" : "28px")};
   margin-right: -5px;
   color: ${(props) =>
-    props.currentrating <= (props.hover || props.rating) ? "#0654ab" : "#ddd"};
+    props.currentrating <= (props.hover || props.rating)
+      ? "#065ec0"
+      : "#2f3135"};
 `;
 
 const Content = styled.div`
-  color: #000;
+  color: #e9e9e9;
   height: 30px;
 `;
 
 const Span = styled.span`
   font-size: 14px;
   padding-left: 4px;
-  color: #aaa;
+  color: #afb0b2;
 `;
 
 const AvarageRatingSpan = styled.span`

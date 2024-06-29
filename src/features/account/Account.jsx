@@ -42,13 +42,13 @@ const StyledLi = styled.li`
   letter-spacing: 1px;
   font-weight: 700;
   font-size: 18px;
-  border-bottom: 1px solid #aaa;
+  border-bottom: 1px solid var(--primary-border-color);
   cursor: pointer;
   padding: 14px 0 20px 0;
-  color: #aaa;
+  color: var(--primary-font-color);
   transition: color 0.2s;
   &:hover {
-    color: #000;
+    color: var(--secondary-font-color);
   }
   @media (max-width: 900px) {
     justify-content: center;
@@ -65,14 +65,13 @@ function Account() {
     navigate("/");
     toast.success(response);
   }
-
   return (
     <Wrapper>
       <MenuWrapper>
         <StyledUl>
           <StyledLi
             style={{
-              color: isOpen === "shipment" && "#000",
+              color: isOpen === "shipment" && "var(--secondary-font-color)",
             }}
             onClick={() => setIsOpen("shipment")}
           >
@@ -80,7 +79,7 @@ function Account() {
           </StyledLi>
           <StyledLi
             style={{
-              color: isOpen === "password" && "#000",
+              color: isOpen === "password" && "var(--secondary-font-color)",
             }}
             onClick={() => setIsOpen("password")}
           >
@@ -88,7 +87,7 @@ function Account() {
           </StyledLi>
           <StyledLi
             style={{
-              color: isOpen === "orders" && "#000",
+              color: isOpen === "orders" && "var(--secondary-font-color)",
             }}
             onClick={() => setIsOpen("orders")}
           >

@@ -4,13 +4,13 @@ import Logo from "./Logo";
 import Menu from "./Menu";
 
 const StyledAppLayout = styled.div`
-  background-color: #fff;
+  background-color: var(--main-wrapper-bg-color);
+  min-height: 100dvh;
 `;
 
 const StyledNav = styled.div`
   width: 100%;
-  color: #fff;
-  border-top: 1px #2f3135 solid;
+  border-top: 1px var(--primary-border-color) solid;
 `;
 
 const StyledHeader = styled.div`
@@ -38,6 +38,7 @@ const StyledMenu = styled.div`
 
 const Wrapper = styled.div`
   padding: 40px 48px 0px;
+  background-color: var(--main-wrapper-bg-color);
   @media (max-width: 900px) {
     padding: 40px 0 20px 0;
   }
@@ -46,7 +47,7 @@ const Wrapper = styled.div`
 const Main = styled.main`
   margin: 0 auto;
   width: var(--page-width);
-  background-color: #fff;
+  background-color: var(--main-wrapper-bg-color);
 `;
 
 function AppLayout() {

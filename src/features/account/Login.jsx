@@ -8,12 +8,11 @@ import toast from "react-hot-toast";
 
 const Wrapper = styled.div`
   display: flex;
-
   align-items: center;
   flex-direction: column;
   color: #fff;
   height: 100dvh;
-  background-color: #0f131b;
+  background-color: var(--main-wrapper-bg-color);
 `;
 
 const Label = styled.label`
@@ -29,16 +28,14 @@ const Span = styled.span`
 const Form = styled.form`
   padding: 24px 40px;
   width: 500px;
-
   background-color: #131418;
-  border: 1px solid #2f3135;
+  border: 1px solid var(--primary-border-color);
   border-radius: 12px;
 `;
 
 const FormRow = styled.div`
   display: flex;
   flex-direction: column;
-
   padding: 12px;
   gap: 12px;
 `;
@@ -49,8 +46,8 @@ const Input = styled.input`
   border-radius: 5px;
   background-color: transparent;
   outline: none;
-  border: 1px solid #2f3135;
-  color: #fff;
+  border: 1px solid var(--primary-border-color);
+  color: var(--secondary-font-color);
   &:focus {
     border: 1px solid #555;
   }
@@ -76,7 +73,7 @@ const StyledNavLink = styled(NavLink)`
   width: fit-content;
   height: fit-content;
 
-  color: #fff;
+  color: var(--secondary-font-color);
 `;
 
 const Img = styled.img`

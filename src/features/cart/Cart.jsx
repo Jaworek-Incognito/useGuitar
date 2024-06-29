@@ -28,6 +28,7 @@ const StyledH1 = styled.h1`
   font-family: "Roboto";
   padding: 6px;
   margin-bottom: 40px;
+  color: var(--primary-font-color);
   @media (max-width: 800px) {
     text-align: center;
   }
@@ -69,7 +70,7 @@ function Cart() {
               textAlign: "center",
               padding: "12px ",
               marginBottom: "12px",
-              borderBottom: "1px solid #999",
+              borderBottom: "1px solid var(--primary-border-color)",
             }}
           >
             Summary

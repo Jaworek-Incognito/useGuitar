@@ -16,10 +16,10 @@ const StyledRow = styled.div`
   width: 94%;
   display: grid;
   grid-template-columns: 80px 1fr 200px 120px 80px;
-  border-top: 1px solid #ddd;
   padding: 26px 6px;
-  margin: 0 auto;
-  background-color: #fff;
+  margin: 0 auto 12px auto;
+  border-radius: 16px;
+  background-color: var(--primary-bg-color);
   @media (max-width: 800px) {
     grid-template-columns: 40% 20% 25% 15%;
     width: 100%;
@@ -34,6 +34,7 @@ const StyledCol = styled.span`
   font-family: "Roboto";
   font-weight: 700;
   letter-spacing: 1px;
+  color: var(--secondary-font-color);
 `;
 
 const StyledButton = styled.button`
@@ -47,24 +48,26 @@ const StyledButton = styled.button`
   color: #555;
   transition: all 0.2s;
   &:hover {
-    color: #111;
+    color: var(--primary-font-color);
   }
 `;
 const QuantityContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-evenly;
+  color: var(--secondary-font-color);
   height: 40px;
   width: 120px;
-  background-color: #eee;
+  background-color: var(--main-wrapper-bg-color);
   border-radius: 12px;
 `;
 const StyledNavLink = styled(NavLink)`
   display: flex;
-  color: #000;
+  color: var(--secondary-font-color);
   align-items: center;
   min-height: 40px;
 `;
+
 const StyledColImage = styled(StyledCol)`
   display: flex;
   justify-content: center;
@@ -132,7 +135,7 @@ function CartProductsTable({ products, cart }) {
                 </StyledButton>
               </QuantityContainer>
             </StyledCol>
-            <StyledCol>{priceConverter(product.price)}</StyledCol>
+            <StyledCol>$ {priceConverter(product.price)}</StyledCol>
             <StyledCol>
               <StyledButton
                 onClick={() => {

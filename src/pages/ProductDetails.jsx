@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { GrStatusGood, GrStatusWarning } from "react-icons/gr";
 import { FaCartPlus, FaRegWindowClose } from "react-icons/fa";
-import Span from "../ui/Span";
 import DetailsTable from "../ui/DetailsTable";
 import Slider from "react-slick";
 import { useState } from "react";
@@ -26,7 +25,7 @@ const StyledButton = styled.button`
   transition: all 0.2s;
   border: none;
   background-color: #065ec0;
-  color: #fff;
+  color: var(--secondary-font-color);
   padding: 16px 24px;
   border-radius: 14px;
   font-size: 16px;
@@ -55,7 +54,7 @@ const Container = styled.div`
 const StyledH1 = styled.h1`
   width: 100%;
   background-color: transparent;
-  color: #000;
+  color: var(--secondary-font-color);
   padding: 20px 0px 0 0px;
   letter-spacing: 1px;
   text-transform: uppercase;
@@ -65,44 +64,46 @@ const StyledH1 = styled.h1`
 const StyledHeaderTitle = styled(StyledH1)`
   padding: 20px 0px 40px 0px;
   text-align: center;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid var(--primary-border-color);
+  color: var(--primary-font-color);
 `;
 
 const Price = styled.span`
   display: block;
   font-size: 30px;
 
-  color: #000;
+  color: var(--secondary-font-color);
 `;
 
 const PriceContainer = styled.div`
   margin-top: 8px;
   padding: 16px 0px 8px 0;
   font-weight: 800;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid var(--primary-border-color);
 `;
 
 const StyledLink = styled(Link)`
   font-size: 14px;
-  color: #000;
+  color: var(--primary-font-color);
   padding: 0 6px;
   text-decoration: none;
   text-transform: capitalize;
+  transition: all 0.2s;
   &:hover {
-    color: #434545;
+    color: var(--secondary-font-color);
   }
 `;
 
 const LesserHeaderSpan = styled.span`
   font-size: 14px;
-  color: #000;
+  color: var(--secondary-font-color);
 `;
 
 const ImageWrapper = styled.div`
   height: 600px;
   width: 500px;
+  background-color: #fff;
 
-  border-right: 1px solid #ddd;
   padding: 0 16px;
   @media (max-width: 900px) {
     display: none;
@@ -127,7 +128,6 @@ const HeaderWrapper = styled.div`
 
   align-items: center;
   width: fit-content;
-
   padding: 0 16px;
 
   @media (max-width: 900px) {
@@ -146,6 +146,7 @@ const ImageContainer = styled.div`
   position: relative;
   height: 600px;
   width: 500px;
+  cursor: pointer;
 `;
 
 const StyledImage = styled.img`
@@ -224,6 +225,7 @@ const DescriptionWrapper = styled.div`
   font-weight: 300;
   width: 800px;
   margin: 0 auto;
+  color: var(--secondary-font-color);
   @media (max-width: 900px) {
     width: var(--page-width);
     padding: 0 20px;
@@ -231,7 +233,7 @@ const DescriptionWrapper = styled.div`
 `;
 
 const RatingContainer = styled.div`
-  border-top: 1px solid #ddd;
+  border-top: 1px solid var(--primary-border-color);
   margin-top: 18px;
 `;
 
@@ -386,9 +388,9 @@ function ProductDetails() {
                 </StatusSpan>
 
                 <StyledButton onClick={() => dispatch(addItem(id))}>
-                  <Span padding="0 10px 0 0" color="#fff">
+                  <span style={{ padding: "0 10px 0 0", color: "#fff" }}>
                     <FaCartPlus />
-                  </Span>
+                  </span>
                   ADD TO CART
                 </StyledButton>
                 <RatingContainer>

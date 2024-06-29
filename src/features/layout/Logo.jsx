@@ -4,6 +4,7 @@ import { MdOutlineAccountCircle } from "react-icons/md";
 import { IoCartOutline } from "react-icons/io5";
 import { useSelector } from "react-redux";
 import { getCurrentUserApi } from "../../services/apiUser";
+import { useUser } from "../../services/useUser";
 
 const StyledLogo = styled.header`
   margin: 0 auto;
@@ -32,7 +33,6 @@ const IconsContainer = styled.div`
   align-items: center;
   flex-basis: 33%;
   gap: 26px;
-  color: #000;
   @media (max-width: 500px) {
     gap: 8px;
   }
@@ -46,6 +46,11 @@ const Wrapper = styled.div`
 
 const StyledNavLink = styled(NavLink)`
   font-size: 40px;
+`;
+
+const StyledSpan = styled.span`
+  font-size: 40px;
+  cursor: pointer;
 `;
 
 const CartIconContainer = styled.div`
@@ -79,10 +84,12 @@ function Logo() {
   const navigate = useNavigate();
 
   async function handleClick() {
-    const user = await getCurrentUserApi();
+    const response = await getCurrentUserApi();
 
-    if (user) {
+    if (response !== 401) {
       navigate("/account");
+    } else {
+      navigate("/login");
     }
   }
   return (
@@ -91,16 +98,16 @@ function Logo() {
         <Container></Container>
         <Container>
           <NavLink to="/">
-            <StyledImage src="https://res.cloudinary.com/dlartwnnr/image/upload/v1714754997/logo-black_wiuzhy.svg" />
+            <StyledImage src="https://res.cloudinary.com/dlartwnnr/image/upload/v1715989024/logo-white-no-background_yb7i1k.svg" />
           </NavLink>
         </Container>
         <IconsContainer>
-          <StyledNavLink title="Account" onClick={handleClick}>
-            <MdOutlineAccountCircle style={{ color: "#000" }} />
-          </StyledNavLink>
+          <StyledSpan title="Account" onClick={handleClick}>
+            <MdOutlineAccountCircle style={{ color: "#e9e9e9" }} />
+          </StyledSpan>
           <StyledNavLink to={"cart"} title="Cart">
             <CartIconContainer>
-              <IoCartOutline style={{ color: "#fff" }} />
+              <IoCartOutline style={{ color: "#e9e9e9" }} />
 
               <CartLengthContainer>
                 {curCart?.length > 9 ? "9+" : curCart?.length || "0"}

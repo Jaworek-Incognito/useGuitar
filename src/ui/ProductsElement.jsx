@@ -6,26 +6,32 @@ import { priceConverter } from "../helpers/priceConverter";
 
 const Li = styled.li`
   display: grid;
-  grid-template-rows: 320px 1fr;
+  grid-template-rows: 240px 1fr;
   border: ${(props) =>
-    props.featured ? "1px solid #3D86D8" : "1px solid #ddd"};
-  color: #000;
+    props.featured
+      ? "1px solid #065EC0"
+      : "1px solid var(--primary-border-color)"};
+  color: var(--secondary-font-color);
   width: 270px;
-  padding: 18px 0;
-  height: 560px;
-  background-color: #fff;
+  padding: 0 0 18px 0;
+  height: 460px;
+  background-color: var(--primary-bg-color);
   overflow: hidden;
-  margin: 0 6px 12px 6px;
+  margin: 0 6px 0px 6px;
   transition: all 0.2s;
   position: relative;
   &:hover {
     border: ${(props) =>
-      props.featured ? "1px solid #065EC0" : "1px solid #aaa"};
+      props.featured ? "1px solid #3D86D8" : "1px solid #4E5157"};
   }
   @media (max-width: 680px) {
     min-width: 90%;
     margin: 0 auto;
   }
+`;
+
+const StyledLink = styled(Link)`
+  margin-bottom: 40px;
 `;
 
 const ImageContainer = styled.div`
@@ -39,18 +45,15 @@ const Img = styled.img`
   display: flex;
   width: auto;
   height: auto;
-  max-width: 180px;
-  max-height: 280px;
+  max-width: 120px;
+  max-height: 220px;
   object-fit: cover;
   scale: 1;
   transition: 0.2s;
-  &:hover {
-    scale: 1.2;
-  }
 `;
 
 const InfoContainer = styled.div`
-  padding: 40px 16px 18px 16px;
+  padding: 20px 16px 18px 16px;
   display: grid;
   grid-template-rows: 2fr 1fr 1fr;
 `;
@@ -58,7 +61,7 @@ const InfoContainer = styled.div`
 const Span = styled.span`
   text-align: left;
   font-size: 18px;
-  color: #000;
+  color: var(--secondary-font-color);
   text-transform: uppercase;
   margin: auto 0;
   @media (max-width: 680px) {
@@ -84,7 +87,7 @@ const DiscountContainer = styled.div`
   top: 14px;
   right: 10px;
   z-index: 1000;
-  background-color: #24a509;
+  background-color: #067206;
   width: fit-content;
   padding: 2px 8px;
   margin-top: 6px;
@@ -112,7 +115,7 @@ function ProductsElement({ product }) {
   const urlName = name.replaceAll(" ", "_");
 
   return (
-    <Link
+    <StyledLink
       to={`/${
         category !== "multi effect" ? `${category}s` : "multiEffects"
       }/product/${urlName}`}
@@ -134,7 +137,6 @@ function ProductsElement({ product }) {
             {averageRating > 0 ? (
               <>
                 <Rating
-                  rate={averageRating}
                   card={"true"}
                   numOfRatings={numOfReviews}
                   ratingAvarage={averageRating}
@@ -149,7 +151,7 @@ function ProductsElement({ product }) {
           <Price>${priceConverter(price)}</Price>
         </InfoContainer>
       </Li>
-    </Link>
+    </StyledLink>
   );
 }
 

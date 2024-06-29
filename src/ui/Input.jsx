@@ -8,9 +8,10 @@ export const Input = styled.input`
   border-radius: 6px;
   font-weight: 300;
   outline: none;
-  border: 1px solid #ddd;
+  border: 1px solid var(--primary-border-color);
   background-color: transparent;
   letter-spacing: 1px;
+  color: var(--secondary-font-color);
   input::-webkit-outer-spin-button,
   input::-webkit-inner-spin-button {
     -webkit-appearance: none;
@@ -18,7 +19,7 @@ export const Input = styled.input`
   }
   &:disabled {
     opacity: 0.5;
-    background-color: #ddd;
+    background-color: #000;
     cursor: not-allowed;
   }
   @media (max-width: 1280px) {

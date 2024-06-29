@@ -6,8 +6,8 @@ const Row = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-top: 1px solid #aaa;
-  color: #000;
+  border-top: 1px solid var(--primary-border-color);
+  color: var(--primary-font-color);
   font-size: 18px;
 
   padding: 24px;
@@ -18,6 +18,7 @@ const RowValue = styled.span`
   color: inherit;
   font-weight: 800;
   letter-spacing: 1px;
+  color: var(--secondary-font-color);
   text-transform: capitalize;
 `;
 

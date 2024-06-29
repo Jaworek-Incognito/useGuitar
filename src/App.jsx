@@ -84,9 +84,8 @@ function App() {
                 path="multiEffects/product/:name"
                 element={<ProductDetails />}
               />
-
-              <Route path="*" element={<PageNotFound />} />
             </Route>
+            <Route path="*" element={<PageNotFound />} />
           </Routes>
         </BrowserRouter>
 

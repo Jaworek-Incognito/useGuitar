@@ -28,7 +28,8 @@ const StyledForm = styled.form`
 const StyledSpan = styled.div`
   margin-top: 10px;
   padding: 0 0 6px 6px;
-  border-bottom: 1px solid #f4f4f4;
+  border-bottom: 1px solid var(--primary-border-color);
+  color: var(--primary-font-color);
   font-weight: 300;
   letter-spacing: 1px;
   @media (max-width: 900px) {

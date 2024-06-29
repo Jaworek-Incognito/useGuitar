@@ -6,12 +6,12 @@ export const OrderTableFooter = styled.div`
   justify-content: flex-end;
   padding-right: 40px;
 
-  border-left: 1px solid #ddd;
-  border-right: 1px solid #ddd;
-  border-bottom: 1px solid #ddd;
+  border-left: 1px solid var(--primary-border-color);
+  border-right: 1px solid var(--primary-border-color);
+  border-bottom: 1px solid var(--primary-border-color);
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
-  background-color: #eee;
+  color: var(--primary-font-color);
 
   height: 60px;
   width: 100%;

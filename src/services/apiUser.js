@@ -8,11 +8,8 @@ export async function getCurrentUserApi() {
     const response = await axios.get(url);
     return response.data.user;
   } catch (error) {
-    if (
-      window.location.href.includes("account") ||
-      error.response.status === 401
-    ) {
-      window.location.href = "http://localhost:5173/login";
+    if (error.response.status === 401) {
+      return error.response.status;
     }
     throw new Error(error.response.data.msg);
   }

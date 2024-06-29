@@ -19,7 +19,9 @@ const Select = styled.select`
   padding: 4px 8px;
   border-radius: 4px;
   outline: none;
-  border: 1px solid #aaa;
+  border: 1px solid var(--primary-border-color);
+  background-color: var(--primary-bg-color);
+  color: #afb0b2;
 `;
 
 function Sort() {
@@ -32,7 +34,7 @@ function Sort() {
   }
   return (
     <SortWrapper>
-      <label htmlFor="sort">sort by</label>
+      <label htmlFor="sort"></label>
       <Select
         id="sort"
         onChange={(e) => handleChange("sortBy", e.target.value)}

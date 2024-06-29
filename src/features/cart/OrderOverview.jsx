@@ -23,10 +23,11 @@ const StyledH1 = styled.h1`
   font-family: "Roboto";
   padding: 6px;
   margin-bottom: 40px;
+  color: var(--primary-font-color);
 `;
 
 const Wrapper = styled.div`
-  margin: 40px auto 80px auto;
+  margin: 40px auto 0 auto;
   display: grid;
   grid-template-columns: 1fr 450px;
   position: relative;
@@ -51,12 +52,12 @@ const EditButton = styled.button`
 `;
 
 const CustomerContainer = styled.div`
-  background-color: #ddd;
+  background-color: var(--primary-bg-color);
   border-radius: 6px;
   padding: 20px 28px;
   width: max-content;
   position: relative;
-
+  color: var(--secondary-font-color);
   &:hover ${EditButton} {
     opacity: 1;
   }
@@ -77,6 +78,7 @@ const StyledSpan = styled.span`
   padding: 0 24px;
   font-weight: 300;
   font-size: 18px;
+  color: var(--secondary-font-color);
 `;
 
 const StyledSpanNumber = styled(StyledSpan)`
@@ -113,7 +115,7 @@ const PriceSummaryContainer = styled.div`
   height: fit-content;
   padding: 22px 28px;
   border-radius: 16px;
-  background-color: #eee;
+  background-color: var(--primary-bg-color);
   margin: 30px auto 0 auto;
   @media (max-width: 900px) {
     position: static;
@@ -130,6 +132,7 @@ const StyledTotalPriceContainer = styled.div`
   letter-spacing: 1px;
   border-bottom: 1px solid #000;
   padding-bottom: 14px;
+  color: var(--secondary-font-color);
 `;
 
 const OtherCostsContainer = styled(StyledTotalPriceContainer)`
@@ -137,10 +140,11 @@ const OtherCostsContainer = styled(StyledTotalPriceContainer)`
   font-weight: 500;
   border: none;
   padding: 0;
+  color: var(--secondary-font-color);
 `;
 
 const DeliveryContainer = styled.div`
-  margin-top: 26px;
+  padding: 26px 0 40px 0;
 `;
 
 const DeliveryTable = styled.div`
@@ -150,7 +154,7 @@ const DeliveryTable = styled.div`
 const DeliveryRow = styled.div`
   display: grid;
   grid-template-columns: 1fr 380px 80px;
-  border-top: 1px solid #ddd;
+  border-top: 1px solid var(--primary-bg-color);
   padding: 18px 16px;
   @media (max-width: 800px) {
     grid-template-columns: 35% 50% 15%;
@@ -161,19 +165,22 @@ const DeliveryRow = styled.div`
 const DeliverySpan = styled.span`
   font-weight: 300;
   font-size: 16px;
+  color: var(--secondary-font-color);
 `;
 
 const DeliveryCompanySpan = styled.span`
   margin-left: 12px;
+  color: var(--secondary-font-color);
 `;
 
 const DeliveryCostSpan = styled.span`
   font-weight: 500;
+  color: var(--secondary-font-color);
 `;
 
 const StyledNavLink = styled(NavLink)`
   display: flex;
-  color: #000;
+  color: var(--secondary-font-color);
   align-items: center;
   min-height: 40px;
   text-transform: uppercase;
